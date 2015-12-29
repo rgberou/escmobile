@@ -58,7 +58,7 @@ public class RegistrationActivity extends Activity implements  AsyncResponse, Vi
     public void onClick(View view) {
         HashMap postData = new HashMap();
         AddressHolder add=new AddressHolder();
-        //postData.put("escape", "esc_mobile");
+
         postData.put("username", username.getText().toString());
         postData.put("lastname", lname.getText().toString());
         postData.put("firstname", fname.getText().toString());
@@ -67,7 +67,7 @@ public class RegistrationActivity extends Activity implements  AsyncResponse, Vi
         postData.put("email", email.getText().toString());
 
         PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
-        task.execute(add.getIpaddress()+"ESCMOBILE/register.php");
+        task.execute(add.getIpaddress()+"Escape/index.php/dashboard/mobile_reg");
         //task.execute("http://10.0.3.2/ESCMOBILE/register.php");
     }
 

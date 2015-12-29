@@ -9,7 +9,7 @@ public class AddressHolder {
    private String ipaddress;
 
     public AddressHolder() {
-        this.ipaddress = "http://192.168.254.103/index.php/";
+        this.ipaddress = "http://192.168.254.103/";
     }
     public String getIpaddress() {
         return ipaddress;
