@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Rg\Desktop\Angel\ESC\app\lib\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="C:\Users\Rg\Desktop\Angel\ESC\app\build\intermediates\pre-dexed\debug\gson-2.2.4-7c6d09cffa7f49607e9ba8f0365465166d097ccf.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rg\Desktop\Angel\ESC\app\lib\KGJsonConverter.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="cea743dc2e193922f7e7dc34858ef15b00afc6db">
+        <dex dex="C:\Users\Rg\Desktop\Angel\ESC\app\build\intermediates\pre-dexed\debug\KGJsonConverter-e88afede5553c453d26855feefdefc25ee1461e7.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rg\.gradle\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.19\a8f23f65fc1e522ee4a1a697ee569901a46741fa\library-1.0.19.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="C:\Users\Rg\Desktop\Angel\ESC\app\build\intermediates\pre-dexed\debug\library-1.0.19-8c58d95fe6a0e9edee6e0182aa95c47d5c806cc1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rg\Desktop\Angel\ESC\app\lib\GenAsync.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8daded3af3a8f0956cadaab263229c5d1508242c">
+        <dex dex="C:\Users\Rg\Desktop\Angel\ESC\app\build\intermediates\pre-dexed\debug\GenAsync-fe2a05e7d201c251e75d2cc39c5af12755e2f030.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rg\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="C:\Users\Rg\Desktop\Angel\ESC\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-037becf76394622f61ef259a9a027dfe81f78040.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rg\Desktop\Angel\ESC\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="C:\Users\Rg\Desktop\Angel\ESC\app\build\intermediates\pre-dexed\debug\classes-942f72b631fc8b76eb19964e15b4eaaf78295372.jar" />
+    </item>
+
+</items>
