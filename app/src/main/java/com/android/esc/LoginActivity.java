@@ -32,9 +32,6 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
 
 
     }
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,6 +60,7 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
 
     @Override
     public void onClick(View view) {
+        AddressHolder add=new AddressHolder();
         HashMap postData = new HashMap();
         if(user_log.length()==0){
             user_log.requestFocus();
@@ -78,7 +76,8 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
             postData.put("password", pass_log.getText().toString());
 
             PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
-            task.execute("http://10.0.3.2/ESCMOBILE/login.php");
+            task.execute(add.getIpaddress()+"ESCMOBILE/login.php");
+            //task.execute(add.getIpaddress()+"ESCMOBILE/login.php");
         }
     }
 }
