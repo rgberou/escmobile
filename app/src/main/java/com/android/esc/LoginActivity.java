@@ -51,6 +51,7 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
             Toast.makeText(this, "Login Success!", Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, DashboardActivity.class);
             startActivity(i);
+            finish();
         }
         else{
             Toast.makeText(this, "Login Failed!", Toast.LENGTH_LONG).show();

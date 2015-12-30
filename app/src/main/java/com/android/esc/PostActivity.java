@@ -45,7 +45,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         ImageView username = (ImageView)findViewById(R.id.imageView);
         username.setImageBitmap(userPost);
 
-        image_name = "pic1.jpg";
+        //image_name = "pic0.jpg";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         userPost.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] array = stream.toByteArray();
@@ -63,7 +63,16 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
 
     @Override
     public void processFinish(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        if(result.equals("success")){
+            Toast.makeText(this, "Uploaded Successfully!", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, DashboardActivity.class);
+            startActivity(i);
+            finish();
+        }
+        else{
+            Toast.makeText(this, "Error in Uploading...", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -72,7 +81,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         AddressHolder add=new AddressHolder();
         HashMap postData = new HashMap();
         postData.put("encoded_string",encoded_string);
-        postData.put("image_name",image_name.toString());
+        //postData.put("image_name",image_name.toString());
         postData.put("caption", caption.getText().toString());
 
         PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
