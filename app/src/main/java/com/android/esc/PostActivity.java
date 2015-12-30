@@ -3,7 +3,6 @@ package com.android.esc;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
@@ -46,7 +45,11 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         ImageView username = (ImageView)findViewById(R.id.imageView);
         username.setImageBitmap(userPost);
 
-        image_name = "pic.jpg";
+        image_name = "pic1.jpg";
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        userPost.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] array = stream.toByteArray();
+        encoded_string = Base64.encodeToString(array, 0);
 
 
     }
@@ -57,15 +60,6 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         finish();
     }
 
-    public void convert(){
-        userPost = BitmapFactory.decodeFile(file_uri.getPath());
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        userPost.compress(Bitmap.CompressFormat.JPEG,100,stream);
-        byte[] array = stream.toByteArray();
-        encoded_string = Base64.encodeToString(array, 0);
-
-    }
-
 
     @Override
     public void processFinish(String result) {
@@ -74,12 +68,12 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
 
     @Override
     public void onClick(View view) {
-        convert();
+
         AddressHolder add=new AddressHolder();
         HashMap postData = new HashMap();
         postData.put("encoded_string",encoded_string);
         postData.put("image_name",image_name.toString());
-        postData.put("caption", caption.toString());
+        postData.put("caption", caption.getText().toString());
 
         PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
         task.execute(add.getIpaddress() + "ESCMOBILE/connect.php");
