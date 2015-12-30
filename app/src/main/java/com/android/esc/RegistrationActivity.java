@@ -44,7 +44,7 @@ public class RegistrationActivity extends Activity implements  AsyncResponse, Vi
                 RadioButton female = (RadioButton)findViewById(R.id.radioFemale);
                 if(male.isChecked()){
                     gender = "M";
-                }else{
+                }else if(female.isChecked()){
                     gender = "F";
                 }
 
@@ -58,17 +58,40 @@ public class RegistrationActivity extends Activity implements  AsyncResponse, Vi
     public void onClick(View view) {
         HashMap postData = new HashMap();
         AddressHolder add=new AddressHolder();
+        if(fname.length()==0){
+            fname.requestFocus();
+            fname.setError("Input Firstname");
+        }
+        else if(lname.length()==0){
+            lname.requestFocus();
+            lname.setError("Input Lastname");
+        }
+        else if(username.length()==0){
+            username.requestFocus();
+            username.setError("Input Username");
+        }
 
-        postData.put("username", username.getText().toString());
-        postData.put("lastname", lname.getText().toString());
-        postData.put("firstname", fname.getText().toString());
-        postData.put("password", password.getText().toString());
-        postData.put("gender", gender.toString());
-        postData.put("email", email.getText().toString());
+        else if(password.length()==0){
+            password.requestFocus();
+            password.setError("Input Password");
+        }
+        else if(email.length()==0){
+            email.requestFocus();
+            email.setError("Input Email");
+        }
+        else {
 
-        PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
-        task.execute(add.getIpaddress()+"Escape/index.php/dashboard/mobile_reg");
-        //task.execute("http://10.0.3.2/ESCMOBILE/register.php");
+            postData.put("username", username.getText().toString());
+            postData.put("lastname", lname.getText().toString());
+            postData.put("firstname", fname.getText().toString());
+            postData.put("password", password.getText().toString());
+            postData.put("gender", gender.toString());
+            postData.put("email", email.getText().toString());
+
+            PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
+            task.execute(add.getIpaddress() + "Escape/index.php/dashboard/mobile_reg");
+            //task.execute("http://10.0.3.2/ESCMOBILE/register.php");
+        }
     }
 
     @Override
@@ -83,43 +106,5 @@ public class RegistrationActivity extends Activity implements  AsyncResponse, Vi
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
     }
 
-    /*public void user_register(View arg0){
-        String method = "register";
-        String u_name = username.getText().toString();
-        String f_name = fname.getText().toString();
-        String l_name = lname.getText().toString();
-        String pass = password.getText().toString();
-        String gen = gender.toString();
-        String e_add = email.getText().toString();
 
-
-
-        if(f_name.length()==0){
-            fname.requestFocus();
-            fname.setError("Input Firstname");
-        }
-        else if(l_name.length()==0){
-            lname.requestFocus();
-            lname.setError("Input Lastname");
-        }
-        else if(u_name.length()==0){
-            username.requestFocus();
-            username.setError("Input Username");
-        }
-
-        else if(pass.length()==0){
-            password.requestFocus();
-            password.setError("Input Password");
-        }
-        else if(e_add.length()==0){
-            email.requestFocus();
-            email.setError("Input Email");
-        }
-        else{
-            BackgroundTask backgroundTask = new BackgroundTask(this);
-            backgroundTask.execute(method, u_name, l_name, f_name, pass, gen, e_add);
-            finish();
-        }
-
-    }*/
 }

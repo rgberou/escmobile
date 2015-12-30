@@ -851,7 +851,6 @@ containing a value of this type.
         public static final int button=0x7f0b004e;
         public static final int button2=0x7f0b0064;
         public static final int button3=0x7f0b0065;
-        public static final int button4=0x7f0b004d;
         public static final int button5=0x7f0b0061;
         public static final int cancelBtn=0x7f0b0062;
         public static final int captionTxt=0x7f0b004c;
@@ -901,6 +900,7 @@ containing a value of this type.
         public static final int normal=0x7f0b0007;
         public static final int passtxt=0x7f0b0045;
         public static final int passwordtxt=0x7f0b0055;
+        public static final int postBtn=0x7f0b004d;
         public static final int progress_circular=0x7f0b0004;
         public static final int progress_horizontal=0x7f0b0005;
         public static final int radio=0x7f0b002f;

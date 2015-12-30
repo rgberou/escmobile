@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="POST"
             android:background="@drawable/button"
-            android:id="@+id/button4"
+            android:id="@+id/postBtn"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:textColor="#fff"
