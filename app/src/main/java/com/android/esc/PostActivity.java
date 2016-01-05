@@ -3,7 +3,6 @@ package com.android.esc;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -16,19 +15,13 @@ import com.kosalgeek.asynctask.AsyncResponse;
 import com.kosalgeek.asynctask.PostResponseAsyncTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.HashMap;
 
 public class PostActivity extends Activity  implements AsyncResponse, View.OnClickListener {
     Bitmap userPost;
     EditText caption;
-    private String encoded_string, image_name;
+    private String encoded_string;
     private Button postBtn;
-    private File file;
-    private Uri file_uri;
-
-    public PostActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +38,10 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         ImageView username = (ImageView)findViewById(R.id.imageView);
         username.setImageBitmap(userPost);
 
-        //image_name = "pic0.jpg";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         userPost.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] array = stream.toByteArray();
         encoded_string = Base64.encodeToString(array, 0);
-
-
     }
 
     public void btnCancelPost(View v){
@@ -65,7 +55,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
     public void processFinish(String result) {
         if(result.equals("success")){
             Toast.makeText(this, "Uploaded Successfully!", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, DashboardActivity.class);
+            Intent i = new Intent(this, NewsfeedActivity.class);
             startActivity(i);
             finish();
         }
@@ -81,7 +71,6 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         AddressHolder add=new AddressHolder();
         HashMap postData = new HashMap();
         postData.put("encoded_string",encoded_string);
-        //postData.put("image_name",image_name.toString());
         postData.put("caption", caption.getText().toString());
 
         PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);

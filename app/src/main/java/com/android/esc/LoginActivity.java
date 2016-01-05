@@ -21,14 +21,20 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
     Button loginBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        User user=new User();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        user_log = (EditText)findViewById(R.id.usertxt);
-        pass_log = (EditText)findViewById(R.id.passtxt);
-        loginBtn = (Button) findViewById(R.id.loginbtn);
-        loginBtn.setOnClickListener(this);
+        if(user.getFirstname()==null){
+            setContentView(R.layout.activity_login);
+            user_log = (EditText)findViewById(R.id.usertxt);
+            pass_log = (EditText)findViewById(R.id.passtxt);
+            loginBtn = (Button) findViewById(R.id.loginbtn);
+            loginBtn.setOnClickListener(this);
+        }else{
+            setContentView(R.layout.activity_newsfeed);
+        }
+
 
 
     }
@@ -49,12 +55,12 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
 
         if(result.equals("Success")){
             Toast.makeText(this, "Login Success!", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, DashboardActivity.class);
+            Intent i = new Intent(this, NewsfeedActivity.class);
             startActivity(i);
             finish();
         }
         else{
-            Toast.makeText(this, "Login Failed!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Incorrect Username/Password.", Toast.LENGTH_LONG).show();
         }
 
     }

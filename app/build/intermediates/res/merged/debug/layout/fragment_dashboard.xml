@@ -35,8 +35,15 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="404dp"
+        android:id="@+id/lvPost"
+        android:layout_gravity="center_horizontal" />
+
+
 </LinearLayout>
 
 
 
-<!-- From: file:/C:/Users/Rg/Desktop/Angel/ESC/app/src/main/res/layout/fragment_dashboard.xml -->
+<!-- From: file:/C:/Users/Rg/Documents/GitHub/escmobile/app/src/main/res/layout/fragment_dashboard.xml -->
