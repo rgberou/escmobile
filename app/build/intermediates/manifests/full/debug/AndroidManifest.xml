@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.android.esc.LoginActivity"
+            android:name="com.android.esc.views.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,28 +34,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.esc.DashboardActivity"
-            android:label="ESC" >
-        </activity>
-        <activity
-            android:name="com.android.esc.TakePictureActivity"
+            android:name="com.android.esc.views.TakePictureActivity"
             android:label="Take Picture" >
         </activity>
         <activity
-            android:name="com.android.esc.RegistrationActivity"
+            android:name="com.android.esc.views.RegistrationActivity"
             android:label="@string/title_activity_registration" >
         </activity>
         <activity
-            android:name="com.android.esc.PostActivity"
+            android:name="com.android.esc.views.PostActivity"
             android:label="@string/title_activity_post" >
         </activity>
         <activity
-            android:name="com.android.esc.NewsfeedActivity"
+            android:name="com.android.esc.views.NewsfeedActivity"
             android:label="@string/title_activity_newsfeed" >
-        </activity>
-        <activity
-            android:name="com.android.esc.TrafActivity"
-            android:label="@string/title_activity_traf" >
         </activity>
     </application>
 

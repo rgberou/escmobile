@@ -5,7 +5,7 @@
     android:paddingRight="5dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    tools:context="com.android.esc.TakePictureActivity">
+    tools:context="com.android.esc.views.TakePictureActivity">
 
     <LinearLayout
         android:orientation="horizontal"
