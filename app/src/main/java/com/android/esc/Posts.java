@@ -5,14 +5,17 @@ import com.google.gson.annotations.SerializedName;
 
 public class Posts {
 
-    @SerializedName("userid")
-    public String userid;
+    @SerializedName("image_id")
+    public String image_id;
 
-    @SerializedName("account_lastname")
-    public String account_lastname;
+    @SerializedName("image_name")
+    public String image_name;
 
-    @SerializedName("account_firstname")
-    public String account_firstname;
+    @SerializedName("image_path")
+    public String image_path;
+
+    @SerializedName("caption")
+    public String caption;
 
 
 }

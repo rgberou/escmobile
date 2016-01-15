@@ -19,5 +19,6 @@
     <string name="title_activity_registration">RegistrationActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_newsfeed">NewsfeedActivity</string>
+    <string name="title_activity_traf">TrafActivity</string>
 
 </resources>

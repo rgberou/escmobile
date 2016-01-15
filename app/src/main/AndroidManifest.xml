@@ -53,6 +53,10 @@
             android:name=".NewsfeedActivity"
             android:label="@string/title_activity_newsfeed" >
         </activity>
+        <activity
+            android:name=".TrafActivity"
+            android:label="@string/title_activity_traf" >
+        </activity>
     </application>
 
 </manifest>

@@ -156,6 +156,7 @@
     <string name="title_activity_post">PostActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="title_activity_traf">TrafActivity</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>

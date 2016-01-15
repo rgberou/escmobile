@@ -1,11 +1,9 @@
 package com.android.esc;
 
-import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
-import android.app.Activity;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,7 +36,7 @@ public class TakePictureActivity extends Activity {
     }
 
     public void btnCancel(View v){
-        Intent i = new Intent(this, DashboardActivity.class);
+        Intent i = new Intent(this, NewsfeedActivity.class);
         startActivity(i);
         finish();
     }

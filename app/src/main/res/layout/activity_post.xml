@@ -16,9 +16,8 @@
         android:paddingRight="11dp"
         android:layout_gravity="center_vertical"
         android:id="@+id/linearLayout"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:weightSum="1"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -27,8 +26,7 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="115dp"
-            android:weightSum="1"
-            android:layout_marginBottom="15dp">
+            android:weightSum="1">
 
             <ImageView
                 android:layout_width="100dp"
@@ -45,6 +43,28 @@
                 android:hint="Write a caption..."
                 android:editable="true"
                 android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@mipmap/gps"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/textView4"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="15dp" />
         </LinearLayout>
 
     </LinearLayout>
