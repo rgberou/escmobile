@@ -76,10 +76,10 @@
                     android:layout_marginBottom="2dp" />
 
                 <Button
-                    android:id="@+id/map"
+                    android:id="@+id/map_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="toggleMenu"
+                    android:onClick="mapview"
                     android:background="#f3fcc2"
                     android:gravity="center"
                     android:textSize="16sp"
@@ -88,7 +88,8 @@
                     android:drawableLeft="@mipmap/map"
                     android:text="Map"
                     android:layout_marginTop="1dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginBottom="2dp"
+                    android:nestedScrollingEnabled="true" />
 
                 <Button
                     android:id="@+id/logout"
@@ -218,4 +219,4 @@
     </RelativeLayout>
 
 </com.android.esc.views.layout.FlyOutContainer>
-<!-- From: file:/C:/Users/Rg/Documents/GitHub/escmobile/app/src/main/res/layout/activity_newsfeed.xml -->
+<!-- From: file:/D:/escmobile/app/src/main/res/layout/activity_newsfeed.xml -->

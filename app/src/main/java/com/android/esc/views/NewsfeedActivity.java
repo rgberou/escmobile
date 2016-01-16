@@ -101,5 +101,11 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
         finish();
     }
 
+    public void mapview(View v){
+        Intent i = new Intent(this,MapsActivity.class);
+        startActivity(i);
+
+    }
+
 
 }
