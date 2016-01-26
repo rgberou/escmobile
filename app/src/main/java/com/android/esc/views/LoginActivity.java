@@ -2,6 +2,7 @@ package com.android.esc.views;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.Menu;
@@ -22,6 +23,8 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class LoginActivity extends Activity implements AsyncResponse, View.OnClickListener{
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     TextToSpeech t1;
     EditText user_log, pass_log;
     Button loginBtn;

@@ -8,13 +8,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.esc.R;
-import com.android.esc.User;
 import com.android.esc.addholder.AddressHolder;
-import com.android.esc.views.layout.FlyOutContainer;
 import com.android.esc.model.Posts;
+import com.android.esc.views.layout.FlyOutContainer;
 import com.kosalgeek.android.json.JsonConverter;
 import com.kosalgeek.asynctask.AsyncResponse;
 import com.kosalgeek.asynctask.PostResponseAsyncTask;
@@ -25,8 +23,8 @@ import java.util.Locale;
 public class NewsfeedActivity extends Activity implements AsyncResponse {
     TextToSpeech t1;
     ListView lvPost;
-    TextView hello;
-    User user=new User();
+    //TextView hello;
+    //User user=new User();
     FlyOutContainer root;
 
     @Override
@@ -62,8 +60,6 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
 
         ArrayList<String> titles = new ArrayList<String>();
         for(Posts value: userList){
-            //user.setFirstname(value.account_firstname);
-            //user.setLastname(value.account_lastname);
             titles.add(value.caption + " ");
         }
 
@@ -95,7 +91,7 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
     }
 
     public void logout(View v){
-        t1.speak("Logout successfully", TextToSpeech.QUEUE_FLUSH, null);
+        t1.speak("Tou have successfully logged out", TextToSpeech.QUEUE_FLUSH, null);
         Intent i = new Intent(this,LoginActivity.class);
         startActivity(i);
         finish();

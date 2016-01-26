@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="  Estimated Distance : "
-        android:id="@+id/textView4"
+        android:id="@+id/tvadd"
         android:layout_alignTop="@+id/textView8"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -52,7 +52,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="  Estimated Duration : "
         android:id="@+id/textView5"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/tvadd"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -83,8 +83,8 @@
         android:text="   "
         android:id="@+id/textView8"
         android:layout_below="@+id/textView3"
-        android:layout_toRightOf="@+id/textView4"
-        android:layout_toEndOf="@+id/textView4" />
+        android:layout_toRightOf="@+id/tvadd"
+        android:layout_toEndOf="@+id/tvadd" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,7 +92,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="   "
         android:id="@+id/textView9"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/tvadd"
         android:layout_toRightOf="@+id/textView5"
         android:layout_toEndOf="@+id/textView5" />
 

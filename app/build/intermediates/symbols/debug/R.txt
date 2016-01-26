@@ -717,6 +717,7 @@ int id expand_activities_button 0x7f0e004c
 int id expanded_menu 0x7f0e005f
 int id first 0x7f0e0087
 int id fnametxt 0x7f0e00a2
+int id getGps 0x7f0e009b
 int id google_wallet_classic 0x7f0e0042
 int id google_wallet_grayscale 0x7f0e0043
 int id google_wallet_monochrome 0x7f0e0044
@@ -734,7 +735,6 @@ int id imageButton 0x7f0e0086
 int id imageButton2 0x7f0e008a
 int id imageView 0x7f0e0099
 int id imageView1 0x7f0e007c
-int id imageView2 0x7f0e009b
 int id imgDisplay 0x7f0e00ae
 int id info 0x7f0e00d8
 int id light 0x7f0e002c
@@ -846,7 +846,6 @@ int id textView11 0x7f0e00bc
 int id textView12 0x7f0e00bd
 int id textView2 0x7f0e00a0
 int id textView3 0x7f0e0093
-int id textView4 0x7f0e009c
 int id textView5 0x7f0e00b7
 int id textView6 0x7f0e00b8
 int id textView7 0x7f0e00b9
@@ -858,6 +857,7 @@ int id title 0x7f0e0051
 int id title_bar 0x7f0e00bf
 int id title_template 0x7f0e0056
 int id topPanel 0x7f0e0055
+int id tvadd 0x7f0e009c
 int id up 0x7f0e0009
 int id useLogo 0x7f0e0013
 int id user_fullname 0x7f0e008b

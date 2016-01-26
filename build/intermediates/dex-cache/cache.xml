@@ -2,46 +2,11 @@
 <items version="2" >
 
     <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="744c49c02a27569cc4cc049685d3649e4ef439f2">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-cd3c629f5bca95250eef9d2b9d618eeb6a6e2a43.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="0c3e81d3eb86b86d194b5cdb6a4de78203f6f7fd">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-e93a2cba54214f26d12f09c3e8dcd1c4bcc0cd40.jar" />
-    </item>
-    <item
         jar="D:\escmobile\app\lib\GenAsync.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="8daded3af3a8f0956cadaab263229c5d1508242c">
         <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\GenAsync-66587561d88cb590b86931bbc7c3b8bfbeed32ab.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-5f26730fe7702ae70a0cac831e02c8d7ba9511b4.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="9c9bdb4b2497465a6cf7d5e8f57c5298f828a380">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-5fc105869a28a65e77563f20bd864442a9a3eff5.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\lib\gson-2.2.4.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\gson-2.2.4-73d687ea384c6a4497c97d5064dc2909c79e9fd5.jar" />
     </item>
     <item
         jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.3.0\jars\classes.jar"
@@ -51,11 +16,25 @@
         <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-05db53dd6f85e8307ccab1083009981656ecd9ad.jar" />
     </item>
     <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\classes.jar"
+        jar="D:\escmobile\app\lib\gson-2.2.4.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-fbe561be1e39242611a30d2da53d6ff1cf968993.jar" />
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\gson-2.2.4-73d687ea384c6a4497c97d5064dc2909c79e9fd5.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-5f26730fe7702ae70a0cac831e02c8d7ba9511b4.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="744c49c02a27569cc4cc049685d3649e4ef439f2">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-cd3c629f5bca95250eef9d2b9d618eeb6a6e2a43.jar" />
     </item>
     <item
         jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.3.0\jars\classes.jar"
@@ -65,32 +44,11 @@
         <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-49e60f200850904ef218dd4943ee6d059f24c74f.jar" />
     </item>
     <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.3.0\jars\classes.jar"
+        jar="C:\Users\Rg\.gradle\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.19\a8f23f65fc1e522ee4a1a697ee569901a46741fa\library-1.0.19.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="6d9ed9a288364688e7fcf6704776284dac1eb42e">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-931b0bae7538af5416de4928985ab2367d5027ce.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="58adcfbe2c8393765e84c5489d01bba6a5159eb2">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-cc175d3db176b7534c83e43a7450e5301bc71ee4.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="ea34579b1be157cd792376362157e9c54ebb4cd7">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-fb349f43a428ec1780b918a1501f4df0bbfa69ee.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="b000ecceb9877fefcdc7ab1959ff03df91551656">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-409e6da6808d33e8a3f9b8aa91f3dbf69354e0c1.jar" />
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\library-1.0.19-8c58d95fe6a0e9edee6e0182aa95c47d5c806cc1.jar" />
     </item>
     <item
         jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
@@ -100,60 +58,11 @@
         <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-23c4d76442c96a3782c1738bcf5f04f5d5c4bc4b.jar" />
     </item>
     <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-3966c0ab2a2a0e91ae5d2ba0b84ac13b77fd4460.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="0a1897426566e408a5c20a3d931f77d89771d07f">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-5cb1764a52b30ff4526b824c2b8ff4cfe96072ab.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="2c6fcd6267cbac6509a2e72a61127534a1d616cf">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-811da1b639660d8e288e2a294017b103f76a2dd4.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\lib\KGJsonConverter.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="cea743dc2e193922f7e7dc34858ef15b00afc6db">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\KGJsonConverter-7b2b76fcf79c2d3ea77a5997c4c97897ad785298.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="fd76d95678a6b2b8a49bb8a9fb5bcef7aedb70e7">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-7f6729e5593b163724ec0666fcc73b620f6f2910.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\libs\internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-de7fc59964f27b1114341b4fdb3c6895a6519df1.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-d9fe8ed042a9f39f0482309e0772ac6e5f31994f.jar" />
-    </item>
-    <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="724ce977487ab3a215d4d2eb47d8dccd9f30013f">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-6f4ad8e5b885fc7e67f19976b3693ce521ffdf7c.jar" />
+        sha1="b000ecceb9877fefcdc7ab1959ff03df91551656">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-409e6da6808d33e8a3f9b8aa91f3dbf69354e0c1.jar" />
     </item>
     <item
         jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.3.0\jars\classes.jar"
@@ -163,18 +72,25 @@
         <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-99ef4876292ed63ca2f64308ed074d4a6b3d140a.jar" />
     </item>
     <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.3.0\jars\classes.jar"
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\libs\internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="71eda10e33212e44245524b5087366ff8d805825">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-7e105ad43b689fd324d1fa7d3f847d84abeb3790.jar" />
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-de7fc59964f27b1114341b4fdb3c6895a6519df1.jar" />
     </item>
     <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.3.0\jars\classes.jar"
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="697679619b00837e3d09e9988a2e1e2a9009d502">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-6f50de8cc8c6b4d3f5e045299eb893c6d9df3c12.jar" />
+        sha1="58adcfbe2c8393765e84c5489d01bba6a5159eb2">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-cc175d3db176b7534c83e43a7450e5301bc71ee4.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="27775d59b16610ac76f1b83693fedd9520396332">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-9586e7200bc9f2ae73b139c4db7e0b01a838432a.jar" />
     </item>
     <item
         jar="C:\Users\Rg\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
@@ -191,25 +107,25 @@
         <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-f8f6fe5f2b92b70773e384d65c99e3a8ad952842.jar" />
     </item>
     <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.3.0\jars\classes.jar"
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="27775d59b16610ac76f1b83693fedd9520396332">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-9586e7200bc9f2ae73b139c4db7e0b01a838432a.jar" />
+        sha1="71eda10e33212e44245524b5087366ff8d805825">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-7e105ad43b689fd324d1fa7d3f847d84abeb3790.jar" />
     </item>
     <item
-        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.3.0\jars\classes.jar"
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="345a1b5cf5b144ce18ba6962bc66a7e2f26c1c1b">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-a4ffb392cc496da731bc306c5aa2e8bb4bf87222.jar" />
+        sha1="ea34579b1be157cd792376362157e9c54ebb4cd7">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-fb349f43a428ec1780b918a1501f4df0bbfa69ee.jar" />
     </item>
     <item
-        jar="C:\Users\Rg\.gradle\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.19\a8f23f65fc1e522ee4a1a697ee569901a46741fa\library-1.0.19.jar"
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
-        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\library-1.0.19-8c58d95fe6a0e9edee6e0182aa95c47d5c806cc1.jar" />
+        sha1="2c6fcd6267cbac6509a2e72a61127534a1d616cf">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-811da1b639660d8e288e2a294017b103f76a2dd4.jar" />
     </item>
     <item
         jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.3.0\jars\classes.jar"
@@ -226,11 +142,95 @@
         <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-eca96586812cda49e44d12d7ad700777a1787b7a.jar" />
     </item>
     <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-3966c0ab2a2a0e91ae5d2ba0b84ac13b77fd4460.jar" />
+    </item>
+    <item
         jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="eb576427887e497cd958a475475f9206e38dc314">
         <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-d676cfb81535b56d11a0c927304528daf0dc3075.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-d9fe8ed042a9f39f0482309e0772ac6e5f31994f.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9c9bdb4b2497465a6cf7d5e8f57c5298f828a380">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-5fc105869a28a65e77563f20bd864442a9a3eff5.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fd76d95678a6b2b8a49bb8a9fb5bcef7aedb70e7">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-7f6729e5593b163724ec0666fcc73b620f6f2910.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="724ce977487ab3a215d4d2eb47d8dccd9f30013f">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-6f4ad8e5b885fc7e67f19976b3693ce521ffdf7c.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6d9ed9a288364688e7fcf6704776284dac1eb42e">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-931b0bae7538af5416de4928985ab2367d5027ce.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0a1897426566e408a5c20a3d931f77d89771d07f">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-5cb1764a52b30ff4526b824c2b8ff4cfe96072ab.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-fbe561be1e39242611a30d2da53d6ff1cf968993.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\lib\KGJsonConverter.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="cea743dc2e193922f7e7dc34858ef15b00afc6db">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\KGJsonConverter-7b2b76fcf79c2d3ea77a5997c4c97897ad785298.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="345a1b5cf5b144ce18ba6962bc66a7e2f26c1c1b">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-a4ffb392cc496da731bc306c5aa2e8bb4bf87222.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="697679619b00837e3d09e9988a2e1e2a9009d502">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-6f50de8cc8c6b4d3f5e045299eb893c6d9df3c12.jar" />
+    </item>
+    <item
+        jar="D:\escmobile\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0c3e81d3eb86b86d194b5cdb6a4de78203f6f7fd">
+        <dex dex="D:\escmobile\app\build\intermediates\pre-dexed\debug\classes-e93a2cba54214f26d12f09c3e8dcd1c4bcc0cd40.jar" />
     </item>
 
 </items>

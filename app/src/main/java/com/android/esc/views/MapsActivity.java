@@ -71,6 +71,7 @@ public class MapsActivity extends FragmentActivity implements AdapterView.OnItem
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        ArrayList<LatLng> locList = new ArrayList<LatLng>();
 
     }
 

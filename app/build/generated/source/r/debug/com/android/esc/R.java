@@ -2251,6 +2251,7 @@ containing a value of this type.
         public static final int expanded_menu=0x7f0e005f;
         public static final int first=0x7f0e0087;
         public static final int fnametxt=0x7f0e00a2;
+        public static final int getGps=0x7f0e009b;
         public static final int google_wallet_classic=0x7f0e0042;
         public static final int google_wallet_grayscale=0x7f0e0043;
         public static final int google_wallet_monochrome=0x7f0e0044;
@@ -2268,7 +2269,6 @@ containing a value of this type.
         public static final int imageButton2=0x7f0e008a;
         public static final int imageView=0x7f0e0099;
         public static final int imageView1=0x7f0e007c;
-        public static final int imageView2=0x7f0e009b;
         public static final int imgDisplay=0x7f0e00ae;
         public static final int info=0x7f0e00d8;
         public static final int light=0x7f0e002c;
@@ -2380,7 +2380,6 @@ containing a value of this type.
         public static final int textView12=0x7f0e00bd;
         public static final int textView2=0x7f0e00a0;
         public static final int textView3=0x7f0e0093;
-        public static final int textView4=0x7f0e009c;
         public static final int textView5=0x7f0e00b7;
         public static final int textView6=0x7f0e00b8;
         public static final int textView7=0x7f0e00b9;
@@ -2392,6 +2391,7 @@ containing a value of this type.
         public static final int title_bar=0x7f0e00bf;
         public static final int title_template=0x7f0e0056;
         public static final int topPanel=0x7f0e0055;
+        public static final int tvadd=0x7f0e009c;
         public static final int up=0x7f0e0009;
         public static final int useLogo=0x7f0e0013;
         public static final int user_fullname=0x7f0e008b;

@@ -121,7 +121,9 @@
                 android:background="@drawable/editstyle"
                 android:ems="10"
                 android:hint="Email Address"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:password="false"
+                android:inputType="textEmailAddress" />
 
         </LinearLayout>
 
