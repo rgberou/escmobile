@@ -24,6 +24,9 @@ import java.util.HashMap;
 public class PostActivity extends Activity  implements AsyncResponse, View.OnClickListener {
     Bitmap userPost;
     EditText caption;
+    String username, password, lati, lang;
+    TextView tvAddress, lat, lng;
+    String userid;
     String gps = "";
     private String encoded_string;
     private Button postBtn;
@@ -34,17 +37,27 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         setContentView(R.layout.activity_post);
 
         caption = (EditText)findViewById(R.id.captionTxt);
+        lat = (TextView)findViewById(R.id.lat);
+        lng = (TextView)findViewById(R.id.lng);
+        tvAddress = (TextView)findViewById(R.id.tvadd);
 
         userPost = this.getIntent().getParcelableExtra("picture");
         Intent intent = getIntent();
         gps = intent.getStringExtra("address");
-
+        userid = intent.getStringExtra("userid");
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
+        lati = intent.getStringExtra("lat");
+        lang = intent.getStringExtra("lng");
 
         postBtn = (Button) findViewById(R.id.postBtn);
         postBtn.setOnClickListener(this);
 
         ImageView username = (ImageView)findViewById(R.id.imageView);
         username.setImageBitmap(userPost);
+
+        lat.setText(lati);
+        lng.setText(lang);
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         userPost.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -57,8 +70,6 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
     }
 
     public void btnCancelPost(View v){
-        Intent i = new Intent(this, NewsfeedActivity.class);
-        startActivity(i);
         finish();
     }
 
@@ -67,8 +78,6 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
     public void processFinish(String result) {
         if(result.equals("success")){
             Toast.makeText(this, "Uploaded Successfully!", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, NewsfeedActivity.class);
-            startActivity(i);
             finish();
         }
         else{
@@ -84,6 +93,11 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         HashMap postData = new HashMap();
         postData.put("encoded_string",encoded_string);
         postData.put("caption", caption.getText().toString());
+        postData.put("location", tvAddress.getText().toString());
+        postData.put("userid", userid);
+        postData.put("latitude", lat.getText().toString());
+        postData.put("longitude", lng.getText().toString());
+        //postData.put("caption", gps);
 
         PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
         task.execute(add.getIpaddress() + "ESCMOBILE/connect.php");
@@ -92,7 +106,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
 
     public void btnGPS(View view){
 
-        final TextView tvAddress = (TextView)findViewById(R.id.tvadd);
+
 
         String address = "";
         GPSService mGPSService = new GPSService(getApplicationContext());
@@ -110,13 +124,17 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         } else {
 
             // Getting location co-ordinates
-            double latitude = mGPSService.getLatitude();
-            double longitude = mGPSService.getLongitude();
+            Double latitude = mGPSService.getLatitude();
+            Double longitude = mGPSService.getLongitude();
+
+
            // Toast.makeText(getActivity(), "Latitude:" + latitude + " | Longitude: " + longitude, Toast.LENGTH_LONG).show();
 
             address = mGPSService.getLocationAddress();
 
             //tvLocation.setText("Latitude: " + latitude + " \nLongitude: " + longitude);
+            lat.setText(latitude+"");
+            lng.setText(longitude+"");
             tvAddress.setText(address);
         }
 

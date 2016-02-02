@@ -19,12 +19,20 @@ public class TakePictureActivity extends Activity {
     private ImageView imgDisplay;
     private Bitmap cam;
     int stat = 0;
+    String username, password;
+    String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_takepicture);
 
         imgDisplay = (ImageView) findViewById(R.id.imgDisplay);
+
+        Intent intent = getIntent();
+        userid = intent.getStringExtra("userid");
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
+
 
     }
 
@@ -39,8 +47,6 @@ public class TakePictureActivity extends Activity {
     }
 
     public void btnCancel(View v){
-        Intent i = new Intent(this, NewsfeedActivity.class);
-        startActivity(i);
         finish();
     }
 
@@ -63,26 +69,27 @@ public class TakePictureActivity extends Activity {
             Toast.makeText(getApplication(),"NO IMAGE", Toast.LENGTH_LONG).show();
         }else{
 
-
-
             String address = "";
+            Double latitude, longitude;
             GPSService mGPSService = new GPSService(getApplicationContext());
             mGPSService.getLocation();
 
             if (mGPSService.isLocationAvailable == false) {
 
                 // Here you can ask the user to try again, using return; for that
-                //Toast.makeText(getActivity(), "Your location is not available, please try again.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Your location is not available, please try again.", Toast.LENGTH_SHORT).show();
+
                 return;
 
                 // Or you can continue without getting the location, remove the return; above and uncomment the line given below
                 // Or you can continue without getting the location, remove the return; above and uncomment the line given below
-                // address = "Location not available";
+                //address = "Location not available";
+
             } else {
 
                 // Getting location co-ordinates
-                double latitude = mGPSService.getLatitude();
-                double longitude = mGPSService.getLongitude();
+                latitude = mGPSService.getLatitude();
+                longitude = mGPSService.getLongitude();
                 // Toast.makeText(getActivity(), "Latitude:" + latitude + " | Longitude: " + longitude, Toast.LENGTH_LONG).show();
 
                 address = mGPSService.getLocationAddress();
@@ -99,7 +106,11 @@ public class TakePictureActivity extends Activity {
             Intent i = new Intent(this, PostActivity.class);
             i.putExtra("picture", cam);
             i.putExtra("address", address);
+            i.putExtra("userid", userid);
+            i.putExtra("lat", String.valueOf(latitude));
+            i.putExtra("lng", String.valueOf(longitude));
             startActivity(i);
+            finish();
         }
 
     }

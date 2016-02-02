@@ -85,6 +85,11 @@
             android:name="com.android.esc.views.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
+        <activity
+            android:name="com.android.esc.views.infoDetails"
+            android:label="Details"
+            android:theme="@style/AppTheme.CustomTheme" >
+        </activity>
 
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity

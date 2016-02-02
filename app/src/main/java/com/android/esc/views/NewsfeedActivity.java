@@ -6,24 +6,29 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.Window;
-import android.widget.ArrayAdapter;
+import android.webkit.WebView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.esc.R;
+import com.android.esc.Users;
 import com.android.esc.addholder.AddressHolder;
-import com.android.esc.model.Posts;
 import com.android.esc.views.layout.FlyOutContainer;
 import com.kosalgeek.android.json.JsonConverter;
 import com.kosalgeek.asynctask.AsyncResponse;
 import com.kosalgeek.asynctask.PostResponseAsyncTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class NewsfeedActivity extends Activity implements AsyncResponse {
     TextToSpeech t1;
     ListView lvPost;
-    //TextView hello;
+    WebView view;
+    String username, password;
+    String userid;
+    TextView useridTxt,usernameTxt,passwordTxt, name;
     //User user=new User();
     FlyOutContainer root;
 
@@ -37,10 +42,28 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
         this.setContentView(root);
         //
         // setContentView(R.layout.activity_newsfeed);
+
+
+        //WEBVIEW
+        String url = "http://192.168.1.4/Escape/index.php/dashboard/newsfeed";
+        view = (WebView) this.findViewById(R.id.webView);
+        view.getSettings().setJavaScriptEnabled(true);
+        view.loadUrl(url);
+        //END
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
+
         AddressHolder add=new AddressHolder();
-        lvPost=(ListView)findViewById(R.id.lvPost);
-        PostResponseAsyncTask task = new PostResponseAsyncTask(this);
-        task.execute(add.getIpaddress()+"ESCMOBILE/retrieve.php?format=json");
+        HashMap postData = new HashMap();
+        postData.put("username", username);
+        postData.put("password", password);
+        PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
+        task.execute(add.getIpaddress() + "ESCMOBILE/display_loggedin.php");
+
+        name=(TextView)findViewById(R.id.user_fullname);
+
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -54,29 +77,24 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
     @Override
     public void processFinish(String result) {
 
+        ArrayList<Users> userList =
+                new JsonConverter<Users>().toArrayList(result, Users.class);
 
-        ArrayList<Posts> userList =
-                new JsonConverter<Posts>().toArrayList(result, Posts.class);
-
-        ArrayList<String> titles = new ArrayList<String>();
-        for(Posts value: userList){
-            titles.add(value.caption + " ");
+        for(Users value: userList) {
+            userid = (value.userid+" ");
+            name.setText(value.account_firstname + " " + value.account_lastname);
         }
 
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_spinner_item,
-                titles);
-        lvPost.setAdapter(adapter);
 
     }
 
     public void postBtn(View v){
         Intent i = new Intent(this,TakePictureActivity.class);
+        i.putExtra("userid", userid);
+        i.putExtra("username", username);
+        i.putExtra("password", password);
         startActivity(i);
-        finish();
+
 
     }
 
@@ -86,12 +104,15 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
 
     public void newsfeed(View v){
         Intent i = new Intent(this,NewsfeedActivity.class);
+        i.putExtra("userid", userid);
+        i.putExtra("username", username);
+        i.putExtra("password", password);
         startActivity(i);
         finish();
     }
 
     public void logout(View v){
-        t1.speak("Tou have successfully logged out", TextToSpeech.QUEUE_FLUSH, null);
+        t1.speak("You have successfully logged out", TextToSpeech.QUEUE_FLUSH, null);
         Intent i = new Intent(this,LoginActivity.class);
         startActivity(i);
         finish();
@@ -103,5 +124,9 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
 
     }
 
+    public void refresh(View v){
+        view.reload();
+
+    }
 
 }

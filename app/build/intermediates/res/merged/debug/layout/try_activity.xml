@@ -34,79 +34,82 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:divider="?android:dividerVertical"
+            android:paddingTop="15dp">
+
+            <Button
+                android:id="@+id/reservestat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="toggleMenu"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:paddingLeft="20dp"
+                android:drawableLeft="@mipmap/newsfeed"
+                android:background="#ffffff"
+                android:text=" Newsfeed"
+                android:paddingRight="150dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp" />
+
+            <Button
+                android:id="@+id/notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="toggleMenu"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:paddingRight="190dp"
+                android:paddingLeft="20dp"
+                android:drawableLeft="@mipmap/map"
+                android:background="#ffffff"
+                android:text="Map"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp" />
+
+            <Button
+                android:id="@+id/logout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="toggleMenu"
+                android:textSize="16sp"
+                android:paddingRight="180dp"
+                android:paddingLeft="20dp"
+                android:drawableLeft="@mipmap/logout"
+                android:background="#ffffff"
+                android:text=" Logout"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp" />
+
+            <Button
+                android:id="@+id/profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:onClick="toggleMenu"
+                android:drawableLeft="@mipmap/profile"
+                android:divider="?android:dividerHorizontal"
+                android:background="#ffffff"
+                android:text="My Profile"
+                android:paddingLeft="20dp"
+                android:paddingRight="150dp"
+                android:paddingBottom="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
         <ScrollView
             android:id="@+id/scrollView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:divider="?android:dividerVertical"
-                android:paddingTop="15dp">
+            android:layout_height="wrap_content" ></ScrollView>
 
-                <Button
-                    android:id="@+id/profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:onClick="toggleMenu"
-                    android:drawableLeft="@mipmap/profile"
-                    android:background="#ffffff"
-                    android:text="My Profile"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="150dp"
-                    android:paddingBottom="2dp" />
-
-                <Button
-                    android:id="@+id/reservestat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="toggleMenu"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:paddingLeft="20dp"
-                    android:drawableLeft="@mipmap/newsfeed"
-                    android:background="#ffffff"
-                    android:text=" Newsfeed"
-                    android:paddingRight="150dp" />
-
-                <Button
-                    android:id="@+id/notification"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="toggleMenu"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:paddingRight="190dp"
-                    android:paddingLeft="20dp"
-                    android:drawableLeft="@mipmap/map"
-                    android:background="#ffffff"
-                    android:text="Map" />
-
-                <Button
-                    android:id="@+id/logout1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="toggleMenu"
-                    android:textSize="16sp"
-                    android:paddingRight="180dp"
-                    android:paddingLeft="20dp"
-                    android:drawableLeft="@mipmap/logout"
-                    android:background="#ffffff"
-                    android:text=" Logout" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:layout_weight="0"
-                    android:background="#F0FFF0"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical" >
-
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

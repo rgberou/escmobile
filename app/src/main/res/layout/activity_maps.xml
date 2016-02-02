@@ -6,6 +6,7 @@
     android:background="#098446"
     tools:context="com.android.esc.views.MapsActivity">
 
+
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -14,62 +15,82 @@
         android:id="@+id/map"
         tools:context=".views.MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/spinner" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:background="@null"
-        android:src="@mipmap/draw_route"
-        android:layout_alignBottom="@+id/map"
-        android:layout_alignRight="@+id/map"
-        android:layout_alignEnd="@+id/map"
-        android:onClick="Bsearch"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/first"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/map"
-        android:layout_alignEnd="@+id/map"
-        android:background="@drawable/editstyle"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:padding="6dp" />
+        android:id="@+id/linearLayout16"
+        android:layout_marginTop="5dp">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/first"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/editstyle"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginBottom="5dp"
-        android:padding="6dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout14"
+            android:layout_below="@+id/imageButton2">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_height="10dp"
-        android:layout_width="fill_parent"
-        android:layout_alignBottom="@+id/map"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/imageButton"
-        android:layout_toLeftOf="@+id/imageButton"
-        android:layout_toStartOf="@+id/imageButton">
+            <com.android.esc.controllers.AutoComplete
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/first"
+                android:drawableLeft="@mipmap/from"
+                android:layout_below="@+id/first"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/editstyle_post"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:hint="From"
+                android:padding="2dp"
+                android:shadowColor="#FF4F5853" />
+        </LinearLayout>
 
-    </Spinner>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/linearLayout14"
+            android:id="@+id/linearLayout15">
+
+            <com.android.esc.controllers.AutoComplete
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText2"
+                android:drawableLeft="@mipmap/to"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/map"
+                android:layout_alignEnd="@+id/map"
+                android:background="@drawable/editstyle_post"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:padding="2dp"
+                android:layout_weight="0.84"
+                android:layout_gravity="center_vertical"
+                android:hint="To"
+                android:shadowColor="#FF4F5853"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -78,9 +99,68 @@
         android:src="@mipmap/logo_info"
         android:background="@null"
         android:onClick="infoSearch"
-        android:layout_below="@+id/editText2"
-        android:layout_toRightOf="@+id/spinner"
-        android:layout_toEndOf="@+id/spinner" />
+        android:layout_below="@+id/linearLayout16"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:id="@+id/spinner"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/imageButton"
+        android:layout_toStartOf="@+id/imageButton">
+
+        <Button
+            android:id="@+id/btnA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:text="A"
+            android:onClick="routeA"
+            android:textColor="#fff"
+            android:textColorHighlight="#da2b2b" />
+        <Button
+            android:id="@+id/btnB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:text="B"
+            android:textColor="#fff"
+            android:onClick="routeB"
+            android:textColorHighlight="#da2b2b" />
+        <Button
+            android:id="@+id/btnC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:text="C"
+            android:onClick="routeC"
+            android:textColor="#fff"
+            android:textColorHighlight="#da2b2b" />
+        <Button
+            android:id="@+id/btnD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:text="D"
+            android:onClick="routeD"
+            android:textColor="#fff"
+            android:textColorHighlight="#da2b2b" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:background="@null"
+        android:src="@mipmap/draw_route"
+        android:onClick="Bsearch"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

@@ -16,7 +16,7 @@ import android.widget.Scroller;
 	private View content;
 
 	// Layout Constants
-	protected static final int menuMargin = 50;
+	protected static final int menuMargin = 100;
 
 	public enum MenuState {
 		CLOSED, OPEN, CLOSING, OPENING

@@ -5,13 +5,15 @@
 
     <FrameLayout
         android:layout_width="151dp"
-        android:layout_height="189dp">
+        android:layout_height="189dp"
+        android:layout_marginLeft="3dp">
 
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="173dp"
-            android:id="@+id/imageView2"
-            android:src="@drawable/avatar"/>
+            android:id="@+id/p_img"
+            android:src="@drawable/avatar"
+            android:layout_marginLeft="3dp" />
     </FrameLayout>
 
     <LinearLayout
@@ -31,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Name"
-                android:id="@+id/textView4" />
+                android:id="@+id/p_name" />
 
         </LinearLayout>
 
@@ -42,11 +44,18 @@
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="111dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Caption"
-                android:id="@+id/textView14" />
+                android:id="@+id/p_cap" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Address"
+            android:id="@+id/p_add" />
 
     </LinearLayout>
 </LinearLayout>

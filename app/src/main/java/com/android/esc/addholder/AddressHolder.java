@@ -8,7 +8,7 @@ public class AddressHolder {
 
    private String ipaddress;
 
-    public AddressHolder() {this.ipaddress = "http://192.168.254.100/";}
+    public AddressHolder() {this.ipaddress = "http://192.168.1.4/";}
     //public AddressHolder() {this.ipaddress = "http://192.168.1.5/";}
     public String getIpaddress() {
         return ipaddress;

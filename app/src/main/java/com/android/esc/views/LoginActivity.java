@@ -75,6 +75,8 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
             t1.speak("You have successfully logged in", TextToSpeech.QUEUE_FLUSH, null);
             Toast.makeText(this, "Login Success!", Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, NewsfeedActivity.class);
+            i.putExtra("username", user_log.getText().toString());
+            i.putExtra("password", pass_log.getText().toString());
             startActivity(i);
             finish();
         }
