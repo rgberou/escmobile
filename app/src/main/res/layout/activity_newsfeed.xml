@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.esc.views.layout.FlyOutContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFF"
+        tools:context="com.android.esc.views.NewsfeedActivity">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="67dp"
+            android:onClick="toggleMenu"
+            android:orientation="vertical"
+            android:background="#31b573"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/user_fullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem Ipsum"
+                android:textColor="#ffffff"
+                android:shadowColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_gravity="left"
+                android:layout_marginLeft="15dp"
+                android:linksClickable="false"
+                android:longClickable="false"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:showDividers="middle"
+                android:divider="?android:dividerHorizontal">
+
+                <Button
+                    android:id="@+id/profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:onClick="toggleMenu"
+                    android:background="#FFF"
+                    android:drawableLeft="@mipmap/profile"
+
+                    android:text="My Profile"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="150dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
+
+                <Button
+                    android:id="@+id/newsfeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="newsfeed"
+                    android:background="#FFF"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:paddingLeft="20dp"
+                    android:drawableLeft="@mipmap/newsfeed"
+
+                    android:text="Newsfeed"
+                    android:paddingRight="150dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginBottom="2dp" />
+
+                <Button
+                    android:id="@+id/map_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="mapview"
+                    android:background="#FFF"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:paddingRight="190dp"
+                    android:paddingLeft="20dp"
+                    android:drawableLeft="@mipmap/map"
+                    android:text="Map"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:nestedScrollingEnabled="true" />
+
+                <Button
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="logout"
+                    android:background="#FFF"
+                    android:textSize="16sp"
+                    android:paddingRight="180dp"
+                    android:paddingLeft="20dp"
+                    android:drawableLeft="@mipmap/logout"
+                    android:text="Logout"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:layout_weight="0"
+                    android:background="#F0FFF0"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical" >
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="toggleMenu"
+        android:background="#fff"
+        tools:context="com.android.esc.views.NewsfeedActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#098446"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout17"
+            android:weightSum="1">
+
+            <Button style="?android:buttonBarButtonStyle"
+                android:id="@+id/button4"
+                android:layout_width="41dp"
+                android:layout_height="wrap_content"
+                android:onClick="toggleMenu"
+                android:textSize="16sp"
+                android:drawableLeft="@mipmap/menu"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="0.05" />
+
+            <TextView
+                android:layout_width="41dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Newsfeed"
+                android:id="@+id/textView3"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1" />
+
+            <Button style="?android:buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/refresh"
+                android:textSize="16sp"
+                android:drawableLeft="@mipmap/refresh"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:onClick="refresh" />
+
+        </LinearLayout>
+
+        <WebView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/webView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout17"
+            android:layout_above="@+id/linearLayout13" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:showDividers="middle"
+            android:divider="?android:dividerHorizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#098446"
+            android:id="@+id/linearLayout13"
+            android:layout_alignParentBottom="true">
+
+
+            <ImageButton style="?android:buttonBarButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/camera"
+                android:id="@+id/button7"
+                android:onClick="postBtn"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
+
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/video"
+                android:text="VIDEO"
+                android:id="@+id/button8"
+                android:background="@drawable/button"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.android.esc.views.layout.FlyOutContainer>
