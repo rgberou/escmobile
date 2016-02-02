@@ -1,5 +1,0 @@
-<root>
-  <item name='android.location.LocationManager NETWORK_PROVIDER'>
-    <annotation name='java.lang.annotation.Deprecated' />
-  </item>
-</root>
