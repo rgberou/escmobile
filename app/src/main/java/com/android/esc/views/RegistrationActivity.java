@@ -91,19 +91,19 @@ public class RegistrationActivity extends Activity implements  AsyncResponse, Vi
             postData.put("email", email.getText().toString());
 
             PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
-            task.execute(add.getIpaddress() + "Escape/index.php/dashboard/mobile_reg");
+            task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/mobile_reg");
             //task.execute("http://10.0.3.2/ESCMOBILE/register.php");
         }
     }
 
     @Override
     public void processFinish(String result) {
-        if(result.equals("success")){
-            Toast.makeText(this, "Registration Success!", Toast.LENGTH_LONG).show();
+        if(result.equals("Registration Success!")){
+            //Toast.makeText(this, "Registration Success!", Toast.LENGTH_LONG).show();
             finish();
         }
         else{
-            Toast.makeText(this, "Login Failed!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Registration failed!", Toast.LENGTH_LONG).show();
         }
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
     }

@@ -36,7 +36,7 @@ public class TakePictureActivity extends Activity {
 
     }
 
-    public void btnTest(View v){
+    public void takePic(View v){
         Intent cameraTake = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraTake, CAMERA_REQUEST);
     }

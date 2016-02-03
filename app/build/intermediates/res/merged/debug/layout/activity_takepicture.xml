@@ -50,7 +50,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:onClick="btnTest"
+            android:onClick="takePic"
             android:textColor="#fff"
             android:textStyle="bold"
             android:layout_weight="1" />

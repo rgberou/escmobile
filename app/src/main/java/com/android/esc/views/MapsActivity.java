@@ -24,8 +24,10 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.android.esc.R;
+import com.android.esc.addholder.AddressHolder;
 import com.android.esc.controllers.PlaceParse;
 import com.android.esc.controllers.TrackerParse;
+import com.android.esc.model.Posts;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +37,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.kosalgeek.android.json.JsonConverter;
+import com.kosalgeek.asynctask.AsyncResponse;
+import com.kosalgeek.asynctask.PostResponseAsyncTask;
 
 import org.json.JSONObject;
 
@@ -53,7 +58,7 @@ import java.util.Locale;
 
 //import com.android.esc.controllers.ChurvaFilter;
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
     GoogleMap map;
     // Spinner spinner;
@@ -67,6 +72,7 @@ public class MapsActivity extends FragmentActivity {
     AutoCompleteTextView firstT, secondT;
     PlacesTask placesTask;
     ParseTask parserTask;
+    AddressHolder add=new AddressHolder();
 
 
     private LatLng mand = new LatLng(10.32361, 123.92222);
@@ -79,8 +85,8 @@ public class MapsActivity extends FragmentActivity {
         getActionBar().hide();
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
-
-
+        PostResponseAsyncTask task = new PostResponseAsyncTask(this);
+        task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
 
 
         ArrayList<LatLng> locList = new ArrayList<LatLng>();
@@ -304,6 +310,19 @@ public class MapsActivity extends FragmentActivity {
             urlConnection.disconnect();
         }
         return data;
+    }
+
+    @Override
+    public void processFinish(String result) {
+        ArrayList<Posts> postList = new JsonConverter<Posts>().toArrayList(result, Posts.class);
+        for(Posts value: postList) {
+            double lat = Double.parseDouble(value.lat);
+            double lng = Double.parseDouble(value.lng);
+            LatLng latlng = new LatLng(lat,lng);
+            map.addMarker(new MarkerOptions().position(latlng).title(value.caption));
+
+        }
+
     }
 
 

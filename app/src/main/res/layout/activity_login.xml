@@ -30,6 +30,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="6dp"
+        android:id="@+id/linearLayout9"
+        android:layout_above="@+id/linearLayout10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in to your account"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_above="@+id/linearLayout8"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -124,25 +143,6 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#fefefe" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="6dp"
-        android:id="@+id/linearLayout9"
-        android:layout_above="@+id/linearLayout10"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign in to your account"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -96,7 +96,6 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
             Toast.makeText(getApplicationContext(), "Please turn on Your GPS Location to continue", Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(getApplicationContext(), "GPS is enabled!", Toast.LENGTH_LONG).show();
             HashMap postData = new HashMap();
             if(user_log.length()==0){
                 user_log.requestFocus();
@@ -113,7 +112,6 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
 
                 PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
                 task.execute(add.getIpaddress()+"Escape/index.php/mobileuser/login");
-                //task.execute(add.getIpaddress()+"ESCMOBILE/login.php");
             }
         }
 

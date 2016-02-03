@@ -30,5 +30,7 @@
     </string-array>
     <string name="title_activity_newsfeed_fte">NewsfeedFTE</string>
     <string name="title_activity_post_activity_fte">PostActivityFTE</string>
+    <string name="title_activity_take_video">Take Video</string>
+    <string name="title_activity_profile">Profile</string>
 
 </resources>

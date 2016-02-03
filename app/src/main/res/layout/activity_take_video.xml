@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    tools:context="com.android.esc.views.TakePictureActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:paddingTop="11dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/linearLayout3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/videoView"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:showDividers="middle"
+        android:divider="?android:dividerHorizontal"
+        android:id="@+id/linearLayout3"
+        tools:targetApi="honeycomb"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button style="?android:buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TAKE VIDEO"
+            android:id="@+id/takeVideo"
+            android:background="@drawable/button"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:onClick="takeVid"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X"
+            android:background="@drawable/button"
+            android:id="@+id/cancelBtn"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:onClick="btnCancel" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="2dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTINUE"
+            android:background="@drawable/button"
+            android:id="@+id/continueBtn"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:onClick="btnContinue"
+            android:singleLine="false" />
+    </LinearLayout>
+
+</RelativeLayout>

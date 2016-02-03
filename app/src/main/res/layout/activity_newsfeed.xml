@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:onClick="toggleMenu"
+                    android:onClick="profile"
                     android:background="#FFF"
                     android:drawableLeft="@mipmap/profile"
 
@@ -205,7 +205,7 @@
                 android:layout_height="match_parent"
                 android:src="@mipmap/camera"
                 android:id="@+id/button7"
-                android:onClick="postBtn"
+                android:onClick="postPicBtn"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/button"
@@ -226,7 +226,8 @@
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="5dp"
+                android:onClick="postVidBtn" />
         </LinearLayout>
 
     </RelativeLayout>

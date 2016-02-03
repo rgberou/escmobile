@@ -7,12 +7,11 @@ import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.esc.R;
-import com.android.esc.model.Users;
 import com.android.esc.addholder.AddressHolder;
+import com.android.esc.model.Users;
 import com.android.esc.views.layout.FlyOutContainer;
 import com.kosalgeek.android.json.JsonConverter;
 import com.kosalgeek.asynctask.AsyncResponse;
@@ -24,11 +23,10 @@ import java.util.Locale;
 
 public class NewsfeedActivity extends Activity implements AsyncResponse {
     TextToSpeech t1;
-    ListView lvPost;
     WebView view;
     String username, password;
     String userid;
-    TextView useridTxt,usernameTxt,passwordTxt, name;
+    TextView name;
     //User user=new User();
     FlyOutContainer root;
     AddressHolder add=new AddressHolder();
@@ -88,13 +86,31 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
 
     }
 
-    public void postBtn(View v){
+    public void postPicBtn(View v){
         Intent i = new Intent(this,TakePictureActivity.class);
         i.putExtra("userid", userid);
         i.putExtra("username", username);
         i.putExtra("password", password);
         startActivity(i);
 
+
+    }
+
+    public void postVidBtn(View v){
+        Intent i = new Intent(this,TakeVideoActivity.class);
+        i.putExtra("userid", userid);
+        i.putExtra("username", username);
+        i.putExtra("password", password);
+        startActivity(i);
+
+    }
+
+    public void profile(View v){
+        Intent i = new Intent(this,ProfileActivity.class);
+        i.putExtra("userid", userid);
+        i.putExtra("username", username);
+        i.putExtra("password", password);
+        startActivity(i);
 
     }
 
@@ -123,6 +139,8 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
         startActivity(i);
 
     }
+
+
 
     public void refresh(View v){
         view.reload();

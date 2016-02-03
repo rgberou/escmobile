@@ -94,8 +94,16 @@
             android:theme="@style/AppTheme.CustomTheme" >
         </activity>
         <activity
-            android:name="com.android.esc.PostActivityFTE"
+            android:name="com.android.esc.views.PostActivityFTE"
             android:label="@string/title_activity_post_activity_fte" >
+        </activity>
+        <activity
+            android:name="com.android.esc.views.TakeVideoActivity"
+            android:label="@string/title_activity_take_video" >
+        </activity>
+        <activity
+            android:name="com.android.esc.views.ProfileActivity"
+            android:label="@string/title_activity_profile" >
         </activity>
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity

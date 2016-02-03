@@ -90,6 +90,14 @@
             android:name=".views.PostActivityFTE"
             android:label="@string/title_activity_post_activity_fte" >
         </activity>
+        <activity
+            android:name=".views.TakeVideoActivity"
+            android:label="@string/title_activity_take_video" >
+        </activity>
+        <activity
+            android:name=".views.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
     </application>
 
 </manifest>
