@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class ProfileActivity extends Activity implements AsyncResponse  {
     AddressHolder add=new AddressHolder();
     String username, password;
-    TextView u_name, lname, fname, gender, email;
+    TextView u_name, lname, fname, email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class ProfileActivity extends Activity implements AsyncResponse  {
         u_name = (TextView)findViewById(R.id.usernameTxt);
         lname = (TextView)findViewById(R.id.lnameTxt);
         fname = (TextView)findViewById(R.id.fnameTxt);
-        gender = (TextView)findViewById(R.id.genderTxt);
+
         email = (TextView)findViewById(R.id.emailTxt);
 
         HashMap postData = new HashMap();

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.android.esc.controllers.GPSService;
 
 
 public class TakePictureActivity extends Activity {
+    final Timer timer=new Timer(120000,1000);
     public static final int CAMERA_REQUEST = 10;
     public static final int VIDEO_REQUEST = 10;
     private ImageView imgDisplay;
@@ -25,7 +27,7 @@ public class TakePictureActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_takepicture);
-
+        timer.start();
         imgDisplay = (ImageView) findViewById(R.id.imgDisplay);
 
         Intent intent = getIntent();
@@ -47,6 +49,7 @@ public class TakePictureActivity extends Activity {
     }
 
     public void btnCancel(View v){
+        timer.cancel();
         finish();
     }
 
@@ -100,6 +103,7 @@ public class TakePictureActivity extends Activity {
             mGPSService.closeGPS();
 
             Intent i = new Intent(this, PostActivity.class);
+            timer.cancel();
             i.putExtra("picture", cam);
             i.putExtra("address", address);
             i.putExtra("userid", userid);
@@ -110,6 +114,39 @@ public class TakePictureActivity extends Activity {
         }
 
     }
+    public class Timer extends CountDownTimer {
+
+        /**
+         * @param millisInFuture    The number of millis in the future from the call
+         *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
+         *                          is called.
+         * @param countDownInterval The interval along the way to receive
+         *                          {@link #onTick(long)} callbacks.
+         */
+        public Timer(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
+
+        @Override
+        public void onFinish() {
+            Intent i = new Intent(getApplicationContext(),NewsfeedActivity.class);
+            i.putExtra("userid", userid);
+            i.putExtra("username", username);
+            i.putExtra("password", password);
+            startActivity(i);
+
+            Toast.makeText(getApplicationContext(), "Your session has ended.", Toast.LENGTH_SHORT).show();
+            finish();
+
+
+        }
+    }
+
 
 
 

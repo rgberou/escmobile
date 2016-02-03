@@ -35,6 +35,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.kosalgeek.android.json.JsonConverter;
@@ -61,8 +62,6 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
     GoogleMap map;
-    // Spinner spinner;
-    //Info
     String totalDistance = " ";
     String totalDuration = " ";
     String dFrom = " ";
@@ -72,6 +71,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     AutoCompleteTextView firstT, secondT;
     PlacesTask placesTask;
     ParseTask parserTask;
+    Marker marker;
     AddressHolder add=new AddressHolder();
 
 
@@ -314,12 +314,15 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
     @Override
     public void processFinish(String result) {
-        ArrayList<Posts> postList = new JsonConverter<Posts>().toArrayList(result, Posts.class);
+        ArrayList<Posts> postList =
+                new JsonConverter<Posts>().toArrayList(result, Posts.class);
         for(Posts value: postList) {
             double lat = Double.parseDouble(value.lat);
             double lng = Double.parseDouble(value.lng);
             LatLng latlng = new LatLng(lat,lng);
-            map.addMarker(new MarkerOptions().position(latlng).title(value.caption));
+
+
+            map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.map)));
 
         }
 
@@ -940,6 +943,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
         }
     }
+
+
 
 
 

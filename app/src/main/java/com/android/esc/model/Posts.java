@@ -26,5 +26,8 @@ public class Posts {
     @SerializedName("account_username")
     public String account_username;
 
+    @SerializedName("date_posted")
+    public String date_posted;
+
 
 }

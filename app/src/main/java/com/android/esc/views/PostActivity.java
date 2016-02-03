@@ -74,6 +74,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
     }
 
     public void btnCancelPost(View v){
+        timer.cancel();
         finish();
     }
 
@@ -92,7 +93,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
 
     @Override
     public void onClick(View view) {
-
+        timer.cancel();
 
         AddressHolder add=new AddressHolder();
         HashMap postData = new HashMap();
@@ -173,8 +174,16 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
 
         @Override
         public void onFinish() {
-            finish();
+            Intent i = new Intent(getApplicationContext(),NewsfeedActivity.class);
+            i.putExtra("userid", userid);
+            i.putExtra("username", username);
+            i.putExtra("password", password);
+            startActivity(i);
+
             Toast.makeText(getApplicationContext(), "Your session has ended.", Toast.LENGTH_SHORT).show();
+            finish();
+
+
         }
     }
 
