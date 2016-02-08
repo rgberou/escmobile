@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +24,13 @@ import com.kosalgeek.asynctask.PostResponseAsyncTask;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
-public class PostActivity extends Activity  implements AsyncResponse, View.OnClickListener {
+public class PostActivity extends Activity  implements AsyncResponse, View.OnClickListener{
     Bitmap userPost;
     EditText caption;
-    String username, password, lati, lang;
-    TextView tvAddress, lat, lng;
-    String userid;
+    String username, password, lati, lang, type;
+    TextView tvAddress, lat, lng, typestatus;
+    Spinner choice;
+    String userid, traf_choice;
     String gps = "";
     private String encoded_string;
     private Button postBtn;
@@ -45,32 +48,65 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         lng = (TextView)findViewById(R.id.lng);
         tvAddress = (TextView)findViewById(R.id.tvadd);
 
+        choice = (Spinner)findViewById(R.id.choice);
+        choice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                traf_choice=choice.getSelectedItem().toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+
+
+        //choice.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        //typestatus = (TextView)findViewById(R.id.namestatus);
+
         userPost = this.getIntent().getParcelableExtra("picture");
         Intent intent = getIntent();
+
         gps = intent.getStringExtra("address");
-        userid = intent.getStringExtra("userid");
-        username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
-        lati = intent.getStringExtra("lat");
-        lang = intent.getStringExtra("lng");
+        if(gps=="IO Exception trying to get address:java.io.IOException: Timed out waiting for response from server"){
+            Toast.makeText(getApplicationContext(), "Error retrieving location. Please try again!", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this,NewsfeedActivity.class);
+            startActivity(i);
+            finish();
+        }else {
+            userid = intent.getStringExtra("userid");
+            username = intent.getStringExtra("username");
+            password = intent.getStringExtra("password");
+            lati = intent.getStringExtra("lat");
+            lang = intent.getStringExtra("lng");
+            type = intent.getStringExtra("type");
 
-        postBtn = (Button) findViewById(R.id.postBtn);
-        postBtn.setOnClickListener(this);
+            postBtn = (Button) findViewById(R.id.postBtn);
+            postBtn.setOnClickListener(this);
 
-        ImageView username = (ImageView)findViewById(R.id.imageView);
-        username.setImageBitmap(userPost);
+            ImageView username = (ImageView) findViewById(R.id.imageView);
+            username.setImageBitmap(userPost);
 
-        lat.setText(lati);
-        lng.setText(lang);
+            lat.setText(lati);
+            lng.setText(lang);
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        userPost.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] array = stream.toByteArray();
-        encoded_string = Base64.encodeToString(array, 0);
 
-       TextView tvAddress = (TextView)findViewById(R.id.tvadd);
 
-        tvAddress.setText(gps);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            userPost.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] array = stream.toByteArray();
+            encoded_string = Base64.encodeToString(array, 0);
+
+            TextView tvAddress = (TextView) findViewById(R.id.tvadd);
+
+            tvAddress.setText(gps);
+        }
     }
 
     public void btnCancelPost(View v){
@@ -83,6 +119,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
     public void processFinish(String result) {
         if(result.equals("success")){
             Toast.makeText(this, "Uploaded Successfully!", Toast.LENGTH_LONG).show();
+            timer.cancel();
             finish();
         }
         else{
@@ -100,13 +137,15 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         postData.put("encoded_string",encoded_string);
         postData.put("caption", caption.getText().toString());
         postData.put("location", tvAddress.getText().toString());
+        postData.put("dist_type", traf_choice.toString());
         postData.put("userid", userid);
         postData.put("latitude", lat.getText().toString());
         postData.put("longitude", lng.getText().toString());
+
         //postData.put("caption", gps);
 
         PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
-        task.execute(add.getIpaddress() + "ESCMOBILE/connect.php");
+        task.execute(add.getIpaddress() + "ESCMOBILE/index.php/mobileuser/upload");
 
     }
 
@@ -154,6 +193,9 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
 
 
     }
+
+
+
     public class Timer extends CountDownTimer{
 
         /**
@@ -174,7 +216,8 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
 
         @Override
         public void onFinish() {
-            Intent i = new Intent(getApplicationContext(),NewsfeedActivity.class);
+            timer.cancel();
+            Intent i = new Intent(getApplicationContext(), NewsfeedActivity.class);
             i.putExtra("userid", userid);
             i.putExtra("username", username);
             i.putExtra("password", password);

@@ -49,6 +49,29 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.10" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Traffic Status:"
+                android:id="@+id/namestatus"
+                android:visibility="visible" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/choice"
+                android:entries="@array/traf_stat_choice"
+                android:popupBackground="#098446"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:weightSum="1"
             android:layout_marginTop="5dp">
 

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:onClick="back"
             android:textSize="16sp"
-            android:drawableLeft="@mipmap/menu"
+            android:drawableLeft="@mipmap/back"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
             android:layout_weight="0.05" />
@@ -38,6 +38,18 @@
             android:textStyle="bold"
             android:layout_marginLeft="5dp"
             android:layout_weight="1" />
+
+        <Button style="?android:buttonBarButtonStyle"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit"
+            android:textSize="16sp"
+            android:drawableLeft="@mipmap/edit"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:onClick="edit"
+            android:layout_marginRight="8dp" />
+
 
     </LinearLayout>
 
@@ -56,6 +68,18 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:id="@+id/imageView2"
+                android:src="@mipmap/profile"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -69,11 +93,12 @@
                 android:id="@+id/textView14" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/usernameTxt"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:text="  " />
         </LinearLayout>
 
         <LinearLayout
@@ -92,11 +117,12 @@
                 android:id="@+id/textView15" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/lnameTxt"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:text="  " />
         </LinearLayout>
 
         <LinearLayout
@@ -115,11 +141,12 @@
                 android:id="@+id/textView17" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/fnameTxt"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:text="  " />
         </LinearLayout>
 
         <LinearLayout
@@ -138,11 +165,12 @@
                 android:id="@+id/textView21" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/emailTxt"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:text="  " />
         </LinearLayout>
 
     </LinearLayout>

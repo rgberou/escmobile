@@ -164,14 +164,15 @@
                 android:layout_weight="1" />
 
             <Button style="?android:buttonBarButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="53dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/refresh"
                 android:textSize="16sp"
                 android:drawableLeft="@mipmap/refresh"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"
-                android:onClick="refresh" />
+                android:onClick="refresh"
+                android:layout_marginRight="8dp" />
 
         </LinearLayout>
 

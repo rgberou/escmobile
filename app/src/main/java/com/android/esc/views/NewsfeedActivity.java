@@ -25,7 +25,8 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
     TextToSpeech t1;
     WebView view;
     String username, password;
-    String userid;
+    String userid, type;
+
     TextView name;
     //User user=new User();
     FlyOutContainer root;
@@ -50,6 +51,7 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
         //END
 
         Intent intent = getIntent();
+        userid = intent.getStringExtra("userid");
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
 
@@ -58,7 +60,7 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
         postData.put("username", username);
         postData.put("password", password);
         PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
-        task.execute(add.getIpaddress() + "ESCMOBILE/display_loggedin.php");
+        task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/getUser");
 
         name=(TextView)findViewById(R.id.user_fullname);
 
@@ -80,6 +82,7 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
 
         for(Users value: userList) {
             userid = (value.userid+" ");
+            type = (value.account_type+" ");
             name.setText(value.account_firstname + " " + value.account_lastname);
         }
 
@@ -87,10 +90,11 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
     }
 
     public void postPicBtn(View v){
-        Intent i = new Intent(this,TakePictureActivity.class);
+        Intent i = new Intent(this, TakePictureActivity.class);
         i.putExtra("userid", userid);
         i.putExtra("username", username);
         i.putExtra("password", password);
+        i.putExtra("type", type);
         startActivity(i);
 
 
@@ -101,6 +105,7 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
         i.putExtra("userid", userid);
         i.putExtra("username", username);
         i.putExtra("password", password);
+        //i.putExtra("type", type);
         startActivity(i);
 
     }
@@ -136,6 +141,7 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
 
     public void mapview(View v){
         Intent i = new Intent(this,MapsActivity.class);
+        //Intent i = new Intent(this,GetDirection.class);
         startActivity(i);
 
     }

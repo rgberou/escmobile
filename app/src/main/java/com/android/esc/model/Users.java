@@ -18,11 +18,11 @@ public class Users {
     @SerializedName("account_firstname")
     public String account_firstname;
 
-    @SerializedName("account_gender")
-    public String account_gender;
-
     @SerializedName("account_email")
     public String account_email;
+
+    @SerializedName("account_type")
+    public String account_type;
 
 
 

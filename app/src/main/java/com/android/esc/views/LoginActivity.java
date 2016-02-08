@@ -82,8 +82,10 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
             startActivity(i);
             finish();
         }
-        else{
+        else if(result.equals("failed")){
             Toast.makeText(this, "Incorrect Username/Password.", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, "Connection to Server Failed", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -103,7 +105,7 @@ public class LoginActivity extends Activity implements AsyncResponse, View.OnCli
             }
             else if(pass_log.length()==0){
                 pass_log.requestFocus();
-                pass_log.setError("Input Username");
+                pass_log.setError("Input Password");
             }
             else {
                 postData.put("escape", "esc_mobile");

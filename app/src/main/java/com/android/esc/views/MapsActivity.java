@@ -1,15 +1,10 @@
 package com.android.esc.views;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -62,11 +57,20 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
     GoogleMap map;
-    String totalDistance = " ";
-    String totalDuration = " ";
+    ArrayList<String> road_add=null;
+    String totalDistance = "";
+    String totalDuration = "";
+    String totalDistanceB = "";
+    String totalDurationB = "";
+    String totalDistanceC = "";
+    String totalDurationC = "";
+    String totalDistanceD = "";
+    String totalDurationD = "";
     String dFrom = " ";
     String dTo = " ";
     String selectedMode = "";
+    String aa, b, c, d;
+    String[] coord;
 
     AutoCompleteTextView firstT, secondT;
     PlacesTask placesTask;
@@ -87,6 +91,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         setUpMapIfNeeded();
         PostResponseAsyncTask task = new PostResponseAsyncTask(this);
         task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
+
 
 
         ArrayList<LatLng> locList = new ArrayList<LatLng>();
@@ -314,17 +319,22 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
     @Override
     public void processFinish(String result) {
-        ArrayList<Posts> postList =
-                new JsonConverter<Posts>().toArrayList(result, Posts.class);
-        for(Posts value: postList) {
-            double lat = Double.parseDouble(value.lat);
-            double lng = Double.parseDouble(value.lng);
-            LatLng latlng = new LatLng(lat,lng);
+        try {
+            ArrayList<Posts> postList =
+                    new JsonConverter<Posts>().toArrayList(result, Posts.class);
+            for(Posts value: postList) {
+                double lat = Double.parseDouble(value.lat);
+                double lng = Double.parseDouble(value.lng);
+                LatLng latlng = new LatLng(lat,lng);
 
 
-            map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.map)));
+                map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.map)));
+
+            }
+        }catch (Exception e){
 
         }
+
 
     }
 
@@ -386,6 +396,129 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         // Executes in UI thread, after the parsing process
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+            Geocoder geocoder;
+            List<Address> addresses=null;
+
+            geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            ArrayList<LatLng> points = null;
+            PolylineOptions lineOptions = null;
+            MarkerOptions markerOptions = new MarkerOptions();
+            String distance = "";
+            String duration = "";
+            String fPoint = "";
+            String lPoint = "";
+
+            // Traversing through all the routes
+            for (int i = 0; i < result.size(); i++) {
+                points = new ArrayList<LatLng>();
+                lineOptions = new PolylineOptions();
+
+                // Fetching i-th route
+                List<HashMap<String, String>> path = result.get(i);
+
+                // Fetching all the points in i-th route
+                for (int j = 0; j < path.size(); j++) {
+                    HashMap<String, String> point = path.get(j);
+
+                    if (j == 0) {    // Get distance from the list
+                        distance = (String) point.get("distance");
+                        continue;
+                    } else if (j == 1) { // Get duration from the list
+                        duration = (String) point.get("duration");
+                        continue;
+                    }
+                    TrackerParse trackerParse = new TrackerParse();
+                    fPoint = trackerParse.getOri();
+
+
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+                    points.add(position);
+
+                   
+
+                }
+
+
+                totalDistance = distance;
+                totalDuration = duration;
+
+                aa = totalDuration;
+
+                //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
+
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points);
+
+
+                //lineOptions.width(3);
+                lineOptions.color(Color.CYAN).geodesic(true);
+            }
+
+            // Drawing polyline in the Google Map for the i-th route
+            map.addPolyline(lineOptions);
+        }
+    }
+    //---------------------------------------------------------------------------------------------------------------------
+
+    // Fetches data from url passed
+    private class DownloadTaskC extends AsyncTask<String, Void, String> {
+
+        // Downloading data in non-ui thread
+        @Override
+        protected String doInBackground(String... url) {
+
+            // For storing data from web service
+            String data = "";
+
+            try {
+                // Fetching the data from web service
+                data = downloadUrl(url[0]);
+            } catch (Exception e) {
+                Log.d("Background Task", e.toString());
+            }
+            return data;
+        }
+
+        // Executes in UI thread, after the execution of
+        // doInBackground()
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            ParserTaskC parserTask = new ParserTaskC();
+
+            // Invokes the thread for parsing the JSON data
+            parserTask.execute(result);
+        }
+    }
+
+    /** A class to parse the Google Places in JSON format */
+    private class ParserTaskC extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+
+        // Parsing the data in non-ui thread
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
+
+            JSONObject jObject;
+            List<List<HashMap<String, String>>> routes = null;
+
+            try {
+                jObject = new JSONObject(jsonData[0]);
+                TrackerParse parser = new TrackerParse();
+
+                // Starts parsing data
+                routes = parser.parse(jObject);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return routes;
+        }
+
+        // Executes in UI thread, after the parsing process
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
 
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
@@ -413,13 +546,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                     } else if (j == 1) { // Get duration from the list
                         duration = (String) point.get("duration");
                         continue;
-                    }/*else if(j==3){ // Get duration from the list
-                        lPoint = (String)point.get("end_address");
-                        continue;
-                    }else if(j==4){ // Get duration from the list
-                        fPoint = (String)point.get("start_address");
-                        continue;
-                    }*/
+                    }
                     TrackerParse trackerParse = new TrackerParse();
                     fPoint = trackerParse.getOri();
 
@@ -427,26 +554,23 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
                     LatLng position = new LatLng(lat, lng);
-
                     points.add(position);
+                    //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
                 }
 
-                /*
-                Context context = getApplicationContext();
-                String textk = "Distance:"+distance + ", Duration:"+duration;
-                Toast.makeText(context, textk, Toast.LENGTH_LONG).show();
-                */
 
-                totalDistance = distance;
-                totalDuration = duration;
-                //dFrom =fPoint;
-                //dTo=lPoint;
+                totalDistanceC = distance;
+                totalDurationC = duration;
+                c = totalDurationC;
 
+                //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
+
+
                 //lineOptions.width(3);
-                lineOptions.color(Color.CYAN).geodesic(true);
+                lineOptions.color(Color.BLACK).geodesic(true);
             }
 
             // Drawing polyline in the Google Map for the i-th route
@@ -454,64 +578,330 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         }
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+// Fetches data from url passed
+    private class DownloadTaskB extends AsyncTask<String, Void, String> {
+
+        // Downloading data in non-ui thread
+        @Override
+        protected String doInBackground(String... url) {
+
+            // For storing data from web service
+            String data = "";
+
+            try {
+                // Fetching the data from web service
+                data = downloadUrl(url[0]);
+            } catch (Exception e) {
+                Log.d("Background Task", e.toString());
+            }
+            return data;
+        }
+
+        // Executes in UI thread, after the execution of
+        // doInBackground()
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            ParserTaskB parserTask = new ParserTaskB();
+
+            // Invokes the thread for parsing the JSON data
+            parserTask.execute(result);
+        }
+    }
+
+    /** A class to parse the Google Places in JSON format */
+    private class ParserTaskB extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+
+        // Parsing the data in non-ui thread
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
+
+            JSONObject jObject;
+            List<List<HashMap<String, String>>> routes = null;
+
+            try {
+                jObject = new JSONObject(jsonData[0]);
+                TrackerParse parser = new TrackerParse();
+
+                // Starts parsing data
+                routes = parser.parse(jObject);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return routes;
+        }
+
+        // Executes in UI thread, after the parsing process
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+
+            ArrayList<LatLng> points = null;
+            PolylineOptions lineOptions = null;
+            MarkerOptions markerOptions = new MarkerOptions();
+            String distance = "";
+            String duration = "";
+            String fPoint = "";
+            String lPoint = "";
+
+            // Traversing through all the routes
+            for (int i = 0; i < result.size(); i++) {
+                points = new ArrayList<LatLng>();
+                lineOptions = new PolylineOptions();
+
+                // Fetching i-th route
+                List<HashMap<String, String>> path = result.get(i);
+                coord = new String[path.size()];
+                // Fetching all the points in i-th route
+                for (int j = 0; j < path.size(); j++) {
+                    HashMap<String, String> point = path.get(j);
+
+                    if (j == 0) {    // Get distance from the list
+                        distance = (String) point.get("distance");
+                        continue;
+                    } else if (j == 1) { // Get duration from the list
+                        duration = (String) point.get("duration");
+                        continue;
+                    }
+                    TrackerParse trackerParse = new TrackerParse();
+                    fPoint = trackerParse.getOri();
+
+
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+                    points.add(position);
+
+                    //String city = addresses.get(0).getLocality();
+
+                    //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
+                }
+
+
+
+
+                totalDistanceB = distance;
+                totalDurationB = duration;
+
+                b = totalDurationB;
+
+                //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
+
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points);
+
+
+                //lineOptions.width(3);
+                lineOptions.color(Color.BLUE).geodesic(true);
+            }
+
+            // Drawing polyline in the Google Map for the i-th route
+            map.addPolyline(lineOptions);
+        }
+    }
+
+    //---------------------------------------------------------------------------------------
+
+    // Fetches data from url passed
+    private class DownloadTaskD extends AsyncTask<String, Void, String> {
+
+        // Downloading data in non-ui thread
+        @Override
+        protected String doInBackground(String... url) {
+
+            // For storing data from web service
+            String data = "";
+
+            try {
+                // Fetching the data from web service
+                data = downloadUrl(url[0]);
+            } catch (Exception e) {
+                Log.d("Background Task", e.toString());
+            }
+            return data;
+        }
+
+        // Executes in UI thread, after the execution of
+        // doInBackground()
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            ParserTaskD parserTask = new ParserTaskD();
+
+            // Invokes the thread for parsing the JSON data
+            parserTask.execute(result);
+        }
+    }
+
+    /** A class to parse the Google Places in JSON format */
+    private class ParserTaskD extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+
+        // Parsing the data in non-ui thread
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
+
+            JSONObject jObject;
+            List<List<HashMap<String, String>>> routes = null;
+
+            try {
+                jObject = new JSONObject(jsonData[0]);
+                TrackerParse parser = new TrackerParse();
+
+                // Starts parsing data
+                routes = parser.parse(jObject);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return routes;
+        }
+
+        // Executes in UI thread, after the parsing process
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+
+            ArrayList<LatLng> points = null;
+            PolylineOptions lineOptions = null;
+            MarkerOptions markerOptions = new MarkerOptions();
+            String distance = "";
+            String duration = "";
+            String fPoint = "";
+            String lPoint = "";
+
+            // Traversing through all the routes
+            for (int i = 0; i < result.size(); i++) {
+                points = new ArrayList<LatLng>();
+                lineOptions = new PolylineOptions();
+
+                // Fetching i-th route
+                List<HashMap<String, String>> path = result.get(i);
+
+                // Fetching all the points in i-th route
+                for (int j = 0; j < path.size(); j++) {
+                    HashMap<String, String> point = path.get(j);
+
+                    if (j == 0) {    // Get distance from the list
+                        distance = (String) point.get("distance");
+                        continue;
+                    } else if (j == 1) { // Get duration from the list
+                        duration = (String) point.get("duration");
+                        continue;
+                    }
+                    TrackerParse trackerParse = new TrackerParse();
+                    fPoint = trackerParse.getOri();
+
+
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+                    points.add(position);
+                    //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
+                }
+
+
+                totalDistanceD = distance;
+                totalDurationD = duration;
+
+                d = totalDurationD;
+
+
+                //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
+
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points);
+
+
+                //lineOptions.width(3);
+                lineOptions.color(Color.GREEN).geodesic(true);
+            }
+
+            // Drawing polyline in the Google Map for the i-th route
+            map.addPolyline(lineOptions);
+        }
+    }
+
+
+
     //-------------------- Buttons Here -----------------------------------------------
 
     //button click Search
     public void Bsearch(View a) {
 
+        EditText startL = (EditText) findViewById(R.id.first);
+        String firstL = startL.getText().toString();
+
+
+        EditText endL = (EditText) findViewById(R.id.editText2);
+        String lastL = endL.getText().toString();
+        dFrom = firstL;
+        dTo = lastL;
+
         map.clear();
 
 
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        List<Address> firstlist = null;
+        List<Address> lastlist = null;
 
-        Criteria criteria = new Criteria();
+        if (!firstL.isEmpty() || !lastL.isEmpty()) {
 
-        String provider = locationManager.getBestProvider(criteria, true);
+            Geocoder gcode = new Geocoder(this);
+            try {
+                firstlist = gcode.getFromLocationName(firstL, 1);
+                lastlist = gcode.getFromLocationName(lastL, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    public void requestPermissions(@NonNull String[] permissions, int requestCode)
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
-            return;
+            Address addressF = firstlist.get(0);
+            // dFrom = ((addressF.getPremises() == null) ? "" : addressF.getPremises())+","+((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
+            Address addressL = lastlist.get(0);
+            //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+
+            LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+            LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+
+            map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+            //url
+            String url = getDirectionsUrl(Flatlng, Llatlng);
+            String urlB = getDirectionsAltUrl(Flatlng, Llatlng);
+            String urlC = transitUrl(Flatlng, Llatlng);
+            String urlD = transitAltUrl(Flatlng, Llatlng);
+            //zoom lvl
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+            builder.include(Flatlng);
+            builder.include(Llatlng);
+
+            LatLngBounds bounds = builder.build();
+
+            int padding = 10; // offset from edges of the map in pixels
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+            map.animateCamera(cu);
+
+            selectedMode = " All ";
+            //line
+            DownloadTask downloadTask = new DownloadTask();
+            downloadTask.execute(url);
+
+            DownloadTaskB downloadTaskB = new DownloadTaskB();
+            downloadTaskB.execute(urlB);
+
+            DownloadTaskC downloadTaskC = new DownloadTaskC();
+            downloadTaskC.execute(urlC);
+
+            DownloadTaskD downloadTaskD = new DownloadTaskD();
+            downloadTaskD.execute(urlD);
+
+
+        } else {
+            Context context = getApplicationContext();
+            String textk = " Fill out Both Forms ";
+            Toast.makeText(context, textk, Toast.LENGTH_LONG).show();
         }
-        Location myLokasyun = locationManager.getLastKnownLocation(provider);
-
-        double latt = myLokasyun.getLatitude();
-
-        double lon = myLokasyun.getLongitude();
-
-        LatLng latlng = new LatLng(latt,lon);
-
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15.5f));
-
-        map.addMarker(new MarkerOptions().position(new LatLng(latt, lon)).title(" You're Here "));
-
-        String cityName = null;
-
-        Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
-        List<Address> addresses;
-        try {
-            addresses = gcd.getFromLocation(latt,
-                    lon, 1);
-            if (addresses.size() > 0)
-                System.out.println(addresses.get(0).getLocality());
-            cityName = addresses.get(0).getLocality();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String s = latt + "\n" + lon + "\n\n My Currrent City is: "
-                +cityName;
-
-        Context context = getApplicationContext();
-
-        Toast.makeText(context,s, Toast.LENGTH_LONG).show();
-
 
     }
 
@@ -556,6 +946,10 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         i.putExtra("mode", selectedMode);
         i.putExtra("start", dFrom);
         i.putExtra("end", dTo);
+        i.putExtra("aa", aa);
+        i.putExtra("b", b);
+        i.putExtra("c", c);
+        i.putExtra("d", d);
 
         // i.putExtra("A", A);
         // i.putExtra("B", B);
@@ -567,6 +961,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     }
 
     public void routeA(View a) throws IOException {
+
         EditText startL = (EditText) findViewById(R.id.first);
         String firstL = startL.getText().toString();
 
@@ -592,39 +987,41 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                 e.printStackTrace();
             }
 
+
             Address addressF = firstlist.get(0);
             // dFrom = ((addressF.getPremises() == null) ? "" : addressF.getPremises())+","+((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
             Address addressL = lastlist.get(0);
             //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+            if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")){
+                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
 
-            LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-            LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-            map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                //url
+                String url = getDirectionsUrl(Flatlng, Llatlng);
 
-            //url
-            String url = getDirectionsUrl(Flatlng, Llatlng);
+                //zoom lvl
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-            //zoom lvl
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(Flatlng);
+                builder.include(Llatlng);
 
-            builder.include(Flatlng);
-            builder.include(Llatlng);
+                LatLngBounds bounds = builder.build();
 
-            LatLngBounds bounds = builder.build();
+                int padding = 10; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-            int padding = 10; // offset from edges of the map in pixels
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                map.animateCamera(cu);
 
-            map.animateCamera(cu);
-
-            selectedMode = " A ";
-            //line
-            DownloadTask downloadTask = new DownloadTask();
-            downloadTask.execute(url);
-
-
+                selectedMode = " A ";
+                //line
+                DownloadTask downloadTask = new DownloadTask();
+                downloadTask.execute(url);
+            }else{
+                Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
+            }
         } else {
             Context context = getApplicationContext();
             String textk = " Fill out Both Forms ";
@@ -692,7 +1089,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             selectedMode = " B ";
 
             //line
-            DownloadTask downloadTask = new DownloadTask();
+            DownloadTaskB downloadTask = new DownloadTaskB();
             downloadTask.execute(url);
 
 
@@ -762,7 +1159,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             selectedMode = " C ";
 
             //line
-            DownloadTask downloadTask = new DownloadTask();
+            DownloadTaskC downloadTask = new DownloadTaskC();
             downloadTask.execute(url);
 
 
@@ -831,7 +1228,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             selectedMode = " D ";
 
             //line
-            DownloadTask downloadTask = new DownloadTask();
+            DownloadTaskD downloadTask = new DownloadTaskD();
             downloadTask.execute(url);
 
 
@@ -840,13 +1237,6 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             String textk = " Fill out Both Forms ";
             Toast.makeText(context, textk, Toast.LENGTH_LONG).show();
         }
-    }
-
-    public String capitalizeFirstLetter(String original) {
-        if (original == null || original.length() == 0) {
-            return original;
-        }
-        return original.substring(0, 1).toUpperCase() + original.substring(1);
     }
 
     private class PlacesTask extends AsyncTask<String, Void, String>{

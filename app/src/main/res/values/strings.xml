@@ -27,10 +27,19 @@
         <item>Light</item>
         <item>Moderate</item>
         <item>Heavy</item>
+        <item>Accident</item>
+        <item>Roadwork</item>
     </string-array>
     <string name="title_activity_newsfeed_fte">NewsfeedFTE</string>
     <string name="title_activity_post_activity_fte">PostActivityFTE</string>
     <string name="title_activity_take_video">Take Video</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_trial">trial</string>
+    <string name="title_activity_get_direction">GetDirection</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

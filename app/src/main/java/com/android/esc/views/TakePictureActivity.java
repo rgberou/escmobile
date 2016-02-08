@@ -16,13 +16,13 @@ import com.android.esc.controllers.GPSService;
 
 public class TakePictureActivity extends Activity {
     final Timer timer=new Timer(120000,1000);
-    public static final int CAMERA_REQUEST = 10;
-    public static final int VIDEO_REQUEST = 10;
+    public static final int CAMERA_REQUEST = 100;
+    public static final int VIDEO_REQUEST = 200;
     private ImageView imgDisplay;
     private Bitmap cam;
     int stat = 0;
-    String username, password;
-    String userid;
+    String username, password, type,userid;
+    String sam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,9 @@ public class TakePictureActivity extends Activity {
         userid = intent.getStringExtra("userid");
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
+        type= intent.getStringExtra("type");
+
+        sam = type.replaceAll("[^ ]", "");
 
 
     }
@@ -102,15 +105,21 @@ public class TakePictureActivity extends Activity {
             // make sure you close the gps after using it. Save user's battery power
             mGPSService.closeGPS();
 
-            Intent i = new Intent(this, PostActivity.class);
-            timer.cancel();
-            i.putExtra("picture", cam);
-            i.putExtra("address", address);
-            i.putExtra("userid", userid);
-            i.putExtra("lat", String.valueOf(latitude));
-            i.putExtra("lng", String.valueOf(longitude));
-            startActivity(i);
-            finish();
+
+            if(address=="IO Exception trying to get address:java.io.IOException: Timed out waiting for response from server"){
+                Toast.makeText(getApplicationContext(), "Error retrieving location. Please try again!", Toast.LENGTH_SHORT).show();
+            }else{
+                Intent i = new Intent(this, PostActivity.class);
+                timer.cancel();
+                i.putExtra("picture", cam);
+                i.putExtra("address", address);
+                i.putExtra("userid", userid);
+                i.putExtra("type", type);
+                i.putExtra("lat", String.valueOf(latitude));
+                i.putExtra("lng", String.valueOf(longitude));
+                startActivity(i);
+                finish();
+            }
         }
 
     }

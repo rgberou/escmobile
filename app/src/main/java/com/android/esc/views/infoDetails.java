@@ -44,27 +44,36 @@ public class infoDetails extends MapsActivity{
         TextView C = (TextView) findViewById(R.id.textC);
         TextView D = (TextView) findViewById(R.id.textD);
 
-
-
         Intent intent = getIntent();
         String distance = intent.getStringExtra("distance");
         String duration =intent.getStringExtra("duration");
         String mode = intent.getStringExtra("mode");
         String start = intent.getStringExtra("start");
         String end = intent.getStringExtra("end");
+        String a = intent.getStringExtra("aa");
+        String b = intent.getStringExtra("b");
+        String c = intent.getStringExtra("c");
+        String d = intent.getStringExtra("d");
 
-        String dis = distance.replaceAll("[^0-9]", "");
+        String dis = distance.replace("km", "");
         String dur = duration.replaceAll("[^0-9]", "");
 
         double fare;
-        fare = 40 + (((Double.valueOf(dis) * 1000)/300)+3.00)/*+((Double.valueOf(dur)/2)+3.50)*/;
+        fare = 40 + (Double.valueOf(dis) * 13.38)/*+((Double.valueOf(dur)/2)+3.50)*/;
 
+        double estimated = fare + (Double.valueOf(dur) * 1.85);
 
-        double time = fare;
+        double estfare = estimated;
         DecimalFormat df = new DecimalFormat("#.##");
-        time = Double.valueOf(df.format(time));
-        String out = String.valueOf(time);
+        estfare = Double.valueOf(df.format(estfare));
+        String estimatedfare = String.valueOf(estfare);
 
+        displayDistance.setText(distance);
+        displayDuration.setText(duration);
+        displayStart.setText(start);
+        displayMode.setText(mode);
+        displayEnd.setText(end);
+        displayfare.setText("P "+estimatedfare);
 
         String AA=intent.getStringExtra("A");
         String BB=intent.getStringExtra("B");
@@ -72,21 +81,10 @@ public class infoDetails extends MapsActivity{
         String DD=intent.getStringExtra("D");
 
 
-        displayDistance.setText(distance);
-        displayDuration.setText(duration);
-        displayStart.setText(start);
-        displayMode.setText(mode);
-        displayEnd.setText(end);
-        displayfare.setText("P "+out);
-
         A.setText(AA);
         B.setText(BB);
         C.setText(CC);
         D.setText(DD);
-
-
-
-
 
 
         //-----Possible display churvagalor -_-

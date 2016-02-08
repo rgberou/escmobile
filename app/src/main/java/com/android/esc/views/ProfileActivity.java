@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.android.esc.EditProfileActivity;
 import com.android.esc.R;
 import com.android.esc.addholder.AddressHolder;
 import com.android.esc.model.Users;
@@ -19,8 +20,9 @@ import java.util.HashMap;
 
 public class ProfileActivity extends Activity implements AsyncResponse  {
     AddressHolder add=new AddressHolder();
-    String username, password;
+    String userid, username, password;
     TextView u_name, lname, fname, email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +31,14 @@ public class ProfileActivity extends Activity implements AsyncResponse  {
         setContentView(R.layout.activity_profile);
 
         Intent intent = getIntent();
+        userid = intent.getStringExtra("userid");
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
         u_name = (TextView)findViewById(R.id.usernameTxt);
         lname = (TextView)findViewById(R.id.lnameTxt);
         fname = (TextView)findViewById(R.id.fnameTxt);
-
         email = (TextView)findViewById(R.id.emailTxt);
+
 
         HashMap postData = new HashMap();
         postData.put("username", username);
@@ -68,4 +71,19 @@ public class ProfileActivity extends Activity implements AsyncResponse  {
         finish();
 
     }
+
+    public void edit(View v){
+        Intent i = new Intent(this,EditProfileActivity.class);
+        i.putExtra("userid", userid);
+        i.putExtra("username", username);
+        i.putExtra("lname", lname.getText().toString());
+        i.putExtra("fname", fname.getText().toString());
+        i.putExtra("email", email.getText().toString());
+        i.putExtra("password", password);
+        startActivity(i);
+        finish();
+
+    }
+
+
 }
