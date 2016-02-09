@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.android.esc.EditProfileActivity;
 import com.android.esc.R;
 import com.android.esc.addholder.AddressHolder;
 import com.android.esc.model.Users;

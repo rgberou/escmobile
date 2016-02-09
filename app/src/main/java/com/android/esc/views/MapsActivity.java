@@ -23,6 +23,7 @@ import com.android.esc.addholder.AddressHolder;
 import com.android.esc.controllers.PlaceParse;
 import com.android.esc.controllers.TrackerParse;
 import com.android.esc.model.Posts;
+import com.android.esc.model.Routes;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -57,7 +58,9 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
     GoogleMap map;
-    ArrayList<String> road_add=null;
+    String puj;
+    String finalDistance = "";
+    String finalDuration = "";
     String totalDistance = "";
     String totalDuration = "";
     String totalDistanceB = "";
@@ -71,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     String selectedMode = "";
     String aa, b, c, d;
     String[] coord;
+    double lat, lng;
 
     AutoCompleteTextView firstT, secondT;
     PlacesTask placesTask;
@@ -137,6 +141,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             }
         });
 
+
+
     }
 
     @Override
@@ -171,6 +177,11 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     }
 
 //-------------------------------------------Url's For Man's Sake -------------------------------------------
+
+    public void back(View v){
+        finish();
+
+    }
 
     //Deafault Url by Google-sama u B*tch
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
@@ -334,6 +345,22 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         }catch (Exception e){
 
         }
+        try {
+            ArrayList<Routes> routesList = new JsonConverter<Routes>().toArrayList(result, Routes.class);
+            for(Routes value: routesList) {
+                Toast.makeText(getApplicationContext(),value.PUJ_id, Toast.LENGTH_LONG).show();
+                puj = (value.PUJ_id);
+                Toast.makeText(getApplicationContext(), puj, Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), puj, Toast.LENGTH_LONG).show();
+        }
+
+
+
+
+
+
 
 
     }
@@ -436,17 +463,18 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                     LatLng position = new LatLng(lat, lng);
                     points.add(position);
 
-                   
+
 
                 }
 
 
                 totalDistance = distance;
                 totalDuration = duration;
-
+                finalDistance = distance;
+                finalDuration = duration;
                 aa = totalDuration;
 
-                //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
+
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
@@ -457,7 +485,11 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            map.addPolyline(lineOptions);
+            try{
+                map.addPolyline(lineOptions);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Unable to connect to Server", Toast.LENGTH_LONG).show();
+            }
         }
     }
     //---------------------------------------------------------------------------------------------------------------------
@@ -561,6 +593,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
                 totalDistanceC = distance;
                 totalDurationC = duration;
+                finalDistance = distance;
+                finalDuration = duration;
                 c = totalDurationC;
 
                 //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
@@ -574,7 +608,11 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            map.addPolyline(lineOptions);
+            try{
+                map.addPolyline(lineOptions);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Unable to connect to Server", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -683,6 +721,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
                 totalDistanceB = distance;
                 totalDurationB = duration;
+                finalDistance = distance;
+                finalDuration = duration;
 
                 b = totalDurationB;
 
@@ -697,7 +737,11 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            map.addPolyline(lineOptions);
+            try{
+                map.addPolyline(lineOptions);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Unable to connect to Server", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -802,11 +846,13 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
                 totalDistanceD = distance;
                 totalDurationD = duration;
+                finalDistance = distance;
+                finalDuration = duration;
 
                 d = totalDurationD;
 
 
-                //Toast.makeText(getApplicationContext(),points.toArray().length, Toast.LENGTH_LONG).show();
+
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
@@ -817,7 +863,12 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            map.addPolyline(lineOptions);
+            try{
+                map.addPolyline(lineOptions);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Unable to connect to Server", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 
@@ -852,50 +903,53 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            try {
+                Address addressF = firstlist.get(0);
+                // dFrom = ((addressF.getPremises() == null) ? "" : addressF.getPremises())+","+((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
+                Address addressL = lastlist.get(0);
+                //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
 
-            Address addressF = firstlist.get(0);
-            // dFrom = ((addressF.getPremises() == null) ? "" : addressF.getPremises())+","+((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
-            Address addressL = lastlist.get(0);
-            //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
 
-            LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-            LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-            map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                //url
+                String url = getDirectionsUrl(Flatlng, Llatlng);
+                String urlB = getDirectionsAltUrl(Flatlng, Llatlng);
+                String urlC = transitUrl(Flatlng, Llatlng);
+                String urlD = transitAltUrl(Flatlng, Llatlng);
+                //zoom lvl
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-            //url
-            String url = getDirectionsUrl(Flatlng, Llatlng);
-            String urlB = getDirectionsAltUrl(Flatlng, Llatlng);
-            String urlC = transitUrl(Flatlng, Llatlng);
-            String urlD = transitAltUrl(Flatlng, Llatlng);
-            //zoom lvl
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(Flatlng);
+                builder.include(Llatlng);
 
-            builder.include(Flatlng);
-            builder.include(Llatlng);
+                LatLngBounds bounds = builder.build();
 
-            LatLngBounds bounds = builder.build();
+                int padding = 10; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-            int padding = 10; // offset from edges of the map in pixels
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                map.animateCamera(cu);
 
-            map.animateCamera(cu);
+                selectedMode = " All ";
+                //line
+                DownloadTask downloadTask = new DownloadTask();
+                downloadTask.execute(url);
 
-            selectedMode = " All ";
-            //line
-            DownloadTask downloadTask = new DownloadTask();
-            downloadTask.execute(url);
+                DownloadTaskB downloadTaskB = new DownloadTaskB();
+                downloadTaskB.execute(urlB);
 
-            DownloadTaskB downloadTaskB = new DownloadTaskB();
-            downloadTaskB.execute(urlB);
+                DownloadTaskC downloadTaskC = new DownloadTaskC();
+                downloadTaskC.execute(urlC);
 
-            DownloadTaskC downloadTaskC = new DownloadTaskC();
-            downloadTaskC.execute(urlC);
+                DownloadTaskD downloadTaskD = new DownloadTaskD();
+                downloadTaskD.execute(urlD);
+            }catch (Exception E)
+            {
 
-            DownloadTaskD downloadTaskD = new DownloadTaskD();
-            downloadTaskD.execute(urlD);
-
+            }
 
         } else {
             Context context = getApplicationContext();
@@ -906,57 +960,58 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     }
 
     public void infoSearch(View a) {
-
-        EditText startL = (EditText) findViewById(R.id.first);
-        String firstL = startL.getText().toString();
-
-        EditText endL = (EditText) findViewById(R.id.editText2);
-        String lastL = endL.getText().toString();
-
-        List<Address> firstlist = null;
-        List<Address> lastlist = null;
-
-        Geocoder gcode = new Geocoder(this);
         try {
-            firstlist = gcode.getFromLocationName(firstL, 1);
-            lastlist = gcode.getFromLocationName(lastL, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
+            EditText startL = (EditText) findViewById(R.id.first);
+            String firstL = startL.getText().toString();
+
+            EditText endL = (EditText) findViewById(R.id.editText2);
+            String lastL = endL.getText().toString();
+
+            List<Address> firstlist = null;
+            List<Address> lastlist = null;
+
+            Geocoder gcode = new Geocoder(this);
+            try {
+                firstlist = gcode.getFromLocationName(firstL, 1);
+                lastlist = gcode.getFromLocationName(lastL, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Address addressF = firstlist.get(0);
+            Address addressL = lastlist.get(0);
+
+            LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+            LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+
+            //ChurvaFilter c = new ChurvaFilter();
+
+            //  String A=c.filterA(Flatlng, Llatlng);
+            //  String B=c.filterB(Flatlng, Llatlng);
+            //  String C=c.filterC(Flatlng, Llatlng);
+            // String D=c.filterD(Flatlng, Llatlng);
+
+
+
+
+            Intent i = new Intent(MapsActivity.this, infoDetails.class);
+            i.putExtra("distance", finalDistance);
+            i.putExtra("duration", finalDuration);
+            i.putExtra("mode", selectedMode);
+            i.putExtra("start", dFrom);
+            i.putExtra("end", dTo);
+            i.putExtra("jeep", puj);
+
+            // i.putExtra("A", A);
+            // i.putExtra("B", B);
+            // i.putExtra("C", C);
+            //i.putExtra("D", D);
+
+            startActivity(i);
+        }catch (Exception e){
+
         }
 
-        Address addressF = firstlist.get(0);
-        Address addressL = lastlist.get(0);
-
-        LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-        LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
-
-        //ChurvaFilter c = new ChurvaFilter();
-
-        //  String A=c.filterA(Flatlng, Llatlng);
-        //  String B=c.filterB(Flatlng, Llatlng);
-        //  String C=c.filterC(Flatlng, Llatlng);
-        // String D=c.filterD(Flatlng, Llatlng);
-
-
-
-
-        Intent i = new Intent(MapsActivity.this, infoDetails.class);
-        i.putExtra("distance", totalDistance);
-        i.putExtra("duration", totalDuration);
-        i.putExtra("mode", selectedMode);
-        i.putExtra("start", dFrom);
-        i.putExtra("end", dTo);
-        i.putExtra("aa", aa);
-        i.putExtra("b", b);
-        i.putExtra("c", c);
-        i.putExtra("d", d);
-
-        // i.putExtra("A", A);
-        // i.putExtra("B", B);
-        // i.putExtra("C", C);
-        //i.putExtra("D", D);
-
-        startActivity(i);
 
     }
 
@@ -986,41 +1041,50 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            try {
+                Address addressF = firstlist.get(0);
+                // dFrom = ((addressF.getPremises() == null) ? "" : addressF.getPremises())+","+((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
+                Address addressL = lastlist.get(0);
+                //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+                if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")){
+                    LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                    LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+
+                    lat = addressF.getLatitude();
+                    lng = addressF.getLongitude();
 
 
-            Address addressF = firstlist.get(0);
-            // dFrom = ((addressF.getPremises() == null) ? "" : addressF.getPremises())+","+((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
-            Address addressL = lastlist.get(0);
-            //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
-            if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")){
-                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                    map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    //url
+                    String url = getDirectionsUrl(Flatlng, Llatlng);
 
-                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    //zoom lvl
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-                //url
-                String url = getDirectionsUrl(Flatlng, Llatlng);
+                    builder.include(Flatlng);
+                    builder.include(Llatlng);
 
-                //zoom lvl
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    LatLngBounds bounds = builder.build();
 
-                builder.include(Flatlng);
-                builder.include(Llatlng);
+                    int padding = 10; // offset from edges of the map in pixels
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-                LatLngBounds bounds = builder.build();
+                    map.animateCamera(cu);
 
-                int padding = 10; // offset from edges of the map in pixels
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                    selectedMode = " A ";
+                    //line
+                    DownloadTask downloadTask = new DownloadTask();
+                    downloadTask.execute(url);
 
-                map.animateCamera(cu);
+                    PostResponseAsyncTask task = new PostResponseAsyncTask(this);
+                    task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/"+addressF.getLatitude()+"/"+addressF.getLongitude());
 
-                selectedMode = " A ";
-                //line
-                DownloadTask downloadTask = new DownloadTask();
-                downloadTask.execute(url);
-            }else{
-                Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
             Context context = getApplicationContext();
@@ -1029,6 +1093,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         }
 
     }
+
+
 
     public void routeB(View a)
     {
@@ -1058,40 +1124,43 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            try {
+                Address addressF = firstlist.get(0);
+                // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
+                Address addressL = lastlist.get(0);
+                //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
 
-            Address addressF = firstlist.get(0);
-            // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
-            Address addressL = lastlist.get(0);
-            //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
 
-            LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-            LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-            map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                //url
+                String url = getDirectionsAltUrl(Flatlng, Llatlng);
 
-            //url
-            String url = getDirectionsAltUrl(Flatlng, Llatlng);
+                //zoom lvl
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-            //zoom lvl
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(Flatlng);
+                builder.include(Llatlng);
 
-            builder.include(Flatlng);
-            builder.include(Llatlng);
+                LatLngBounds bounds = builder.build();
 
-            LatLngBounds bounds = builder.build();
+                int padding = 10; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-            int padding = 10; // offset from edges of the map in pixels
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                map.animateCamera(cu);
 
-            map.animateCamera(cu);
+                selectedMode = " B ";
 
-            selectedMode = " B ";
+                //line
+                DownloadTaskB downloadTask = new DownloadTaskB();
+                downloadTask.execute(url);
+            }catch (Exception e)
+            {
 
-            //line
-            DownloadTaskB downloadTask = new DownloadTaskB();
-            downloadTask.execute(url);
-
+            }
 
         } else {
             Context context = getApplicationContext();
@@ -1128,40 +1197,43 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            try {
+                Address addressF = firstlist.get(0);
+                // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
+                Address addressL = lastlist.get(0);
+                //  dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
 
-            Address addressF = firstlist.get(0);
-            // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
-            Address addressL = lastlist.get(0);
-            //  dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
 
-            LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-            LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-            map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                //url
+                String url = transitUrl(Flatlng, Llatlng);
 
-            //url
-            String url = transitUrl(Flatlng, Llatlng);
+                //zoom lvl
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-            //zoom lvl
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(Flatlng);
+                builder.include(Llatlng);
 
-            builder.include(Flatlng);
-            builder.include(Llatlng);
+                LatLngBounds bounds = builder.build();
 
-            LatLngBounds bounds = builder.build();
+                int padding = 10; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-            int padding = 10; // offset from edges of the map in pixels
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                map.animateCamera(cu);
 
-            map.animateCamera(cu);
+                selectedMode = " C ";
 
-            selectedMode = " C ";
+                //line
+                DownloadTaskC downloadTask = new DownloadTaskC();
+                downloadTask.execute(url);
+            }catch (Exception e)
+            {
 
-            //line
-            DownloadTaskC downloadTask = new DownloadTaskC();
-            downloadTask.execute(url);
-
+            }
 
         } else {
             Context context = getApplicationContext();
@@ -1198,39 +1270,42 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            try {
+                Address addressF = firstlist.get(0);
+                // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
+                Address addressL = lastlist.get(0);
+                // dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
 
-            Address addressF = firstlist.get(0);
-            // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
-            Address addressL = lastlist.get(0);
-            // dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
-            LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-            LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-            map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                //url
+                String url = transitAltUrl(Flatlng, Llatlng);
 
-            //url
-            String url = transitAltUrl(Flatlng, Llatlng);
+                //zoom lvl
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-            //zoom lvl
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(Flatlng);
+                builder.include(Llatlng);
 
-            builder.include(Flatlng);
-            builder.include(Llatlng);
+                LatLngBounds bounds = builder.build();
 
-            LatLngBounds bounds = builder.build();
+                int padding = 10; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-            int padding = 10; // offset from edges of the map in pixels
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                map.animateCamera(cu);
 
-            map.animateCamera(cu);
+                selectedMode = " D ";
 
-            selectedMode = " D ";
+                //line
+                DownloadTaskD downloadTask = new DownloadTaskD();
+                downloadTask.execute(url);
+            }catch (Exception e)
+            {
 
-            //line
-            DownloadTaskD downloadTask = new DownloadTaskD();
-            downloadTask.execute(url);
-
+            }
 
         } else {
             Context context = getApplicationContext();

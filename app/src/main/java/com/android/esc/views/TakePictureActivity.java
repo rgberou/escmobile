@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ public class TakePictureActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getActionBar().hide();
         setContentView(R.layout.activity_takepicture);
         timer.start();
         imgDisplay = (ImageView) findViewById(R.id.imgDisplay);
@@ -38,6 +41,12 @@ public class TakePictureActivity extends Activity {
 
         sam = type.replaceAll("[^ ]", "");
 
+
+    }
+
+    public void back(View v){
+        timer.cancel();
+        finish();
 
     }
 

@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
+    android:layout_height="match_parent"
     tools:context="com.android.esc.views.TakePictureActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#098446"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout21"
+        android:weightSum="1" >
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/button9"
+            android:layout_width="41dp"
+            android:layout_height="wrap_content"
+            android:onClick="back"
+            android:textSize="16sp"
+            android:drawableLeft="@mipmap/back"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_weight="0.05" />
+
+        <TextView
+            android:layout_width="41dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Take Picture"
+            android:id="@+id/textView9"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -20,7 +55,8 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/linearLayout3"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/linearLayout21">
 
         <ImageView
             android:layout_width="fill_parent"
@@ -39,7 +75,9 @@
         tools:targetApi="honeycomb"
         android:layout_above="@+id/linearLayout2"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
 
         <Button style="?android:buttonBarButtonStyle"
             android:layout_width="wrap_content"
@@ -74,7 +112,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:id="@+id/linearLayout2"
-        android:layout_marginTop="2dp">
+        android:layout_marginTop="2dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp">
 
         <Button
             android:layout_width="wrap_content"

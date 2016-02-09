@@ -99,12 +99,8 @@
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".views.EditProfileActivity"
             android:label="@string/title_activity_edit_profile" >
-        </activity>
-        <activity
-            android:name=".views.GetDirection"
-            android:label="@string/title_activity_get_direction" >
         </activity>
     </application>
 

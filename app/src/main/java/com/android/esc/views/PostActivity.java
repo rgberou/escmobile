@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Base64;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,8 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         timer.start();
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getActionBar().hide();
         setContentView(R.layout.activity_post);
 
 
@@ -109,6 +112,12 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         }
     }
 
+    public void back(View v){
+        timer.cancel();
+        finish();
+
+    }
+
     public void btnCancelPost(View v){
         timer.cancel();
         finish();
@@ -145,7 +154,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         //postData.put("caption", gps);
 
         PostResponseAsyncTask task = new PostResponseAsyncTask(this, postData);
-        task.execute(add.getIpaddress() + "ESCMOBILE/index.php/mobileuser/upload");
+        task.execute(add.getIpaddress() + "ESCMOBILE/connect.php");
 
     }
 
