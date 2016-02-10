@@ -151,7 +151,10 @@
         android:divider="?android:dividerHorizontal"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:paddingLeft="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp">
 
         <Button
             android:layout_width="wrap_content"

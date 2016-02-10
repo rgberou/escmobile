@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.android.esc.R;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 
 public class infoDetails extends MapsActivity{
@@ -28,7 +29,7 @@ public class infoDetails extends MapsActivity{
         TextView displayStart = (TextView) findViewById(R.id.tvFrom);
         TextView displayEnd = (TextView) findViewById(R.id.tvTo);
         TextView displayfare = (TextView) findViewById(R.id.tvFare);
-
+        TextView displaypuj = (TextView) findViewById(R.id.tvPUJ);
 
 
         Intent intent = getIntent();
@@ -37,11 +38,13 @@ public class infoDetails extends MapsActivity{
         String mode = intent.getStringExtra("mode");
         String start = intent.getStringExtra("start");
         String end = intent.getStringExtra("end");
+        String pujs = intent.getStringExtra("jeep");
         String a = intent.getStringExtra("aa");
         String b = intent.getStringExtra("b");
         String c = intent.getStringExtra("c");
         String d = intent.getStringExtra("d");
-        String puj = intent.getStringExtra("jeep");
+        ArrayList<String> pujlist;
+        pujlist = intent.getStringArrayListExtra("jeep");
 
         String dis = distance.replace("km", "");
         String dur = duration.replaceAll("[^0-9]", "");
@@ -60,6 +63,9 @@ public class infoDetails extends MapsActivity{
         displayStart.setText(start);
         displayEnd.setText(end);
         displayfare.setText("P "+estimatedfare);
+        displaypuj.setText(pujs);
+
+
 
 
 
@@ -72,7 +78,13 @@ public class infoDetails extends MapsActivity{
         int width = displayMetrics.widthPixels;
         int height =displayMetrics.heightPixels;
 
-        getWindow().setLayout((int)(width*.7),(int)(height*.5));
+        getWindow().setLayout((int)(width*.8),(int)(height*.6));
+
+
+        /*for(int i=0;i<pujlist.size();i++)
+        {
+            Toast.makeText(getApplicationContext(),pujlist.get(i),Toast.LENGTH_LONG).show();
+        }*/
 
         //---End-->
 

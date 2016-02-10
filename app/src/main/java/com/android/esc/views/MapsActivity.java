@@ -56,8 +56,12 @@ import java.util.Locale;
 //import com.android.esc.controllers.ChurvaFilter;
 
 public class MapsActivity extends FragmentActivity implements AsyncResponse {
-
+    boolean start=false;
     GoogleMap map;
+    ArrayList<Posts> postList;
+    String puj2[];
+    ArrayList<String> pujlist= new ArrayList<String>();
+    ArrayList<Routes> routesList;
     String puj;
     String finalDistance = "";
     String finalDuration = "";
@@ -72,9 +76,11 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     String dFrom = " ";
     String dTo = " ";
     String selectedMode = "";
-    String aa, b, c, d;
+    String aa, b, c, d, dis="",jproute="";
     String[] coord;
     double lat, lng;
+
+    StringBuilder sb = new StringBuilder();
 
     AutoCompleteTextView firstT, secondT;
     PlacesTask placesTask;
@@ -331,13 +337,11 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     @Override
     public void processFinish(String result) {
         try {
-            ArrayList<Posts> postList =
-                    new JsonConverter<Posts>().toArrayList(result, Posts.class);
+           postList = new JsonConverter<Posts>().toArrayList(result, Posts.class);
             for(Posts value: postList) {
                 double lat = Double.parseDouble(value.lat);
                 double lng = Double.parseDouble(value.lng);
                 LatLng latlng = new LatLng(lat,lng);
-
 
                 map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.map)));
 
@@ -345,16 +349,33 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         }catch (Exception e){
 
         }
-        try {
-            ArrayList<Routes> routesList = new JsonConverter<Routes>().toArrayList(result, Routes.class);
-            for(Routes value: routesList) {
-                Toast.makeText(getApplicationContext(),value.PUJ_id, Toast.LENGTH_LONG).show();
-                puj = (value.PUJ_id);
-                Toast.makeText(getApplicationContext(), puj, Toast.LENGTH_LONG).show();
+
+        if(start){
+
+            try {
+                sb.setLength(0);
+                routesList = new JsonConverter<Routes>().toArrayList(result, Routes.class);
+                for(Routes value: routesList) {
+
+                    puj2=new String[routesList.size()];
+                    if(pujlist.contains(value.PUJ_id)){
+
+                    }else {
+
+                        pujlist.add(value.PUJ_id);
+
+                    }
+
+                }
+                jproute = String.valueOf(sb.append(pujlist + " "));
+                dis = jproute.replace("[", "").replace("]", "");
+
+                Toast.makeText(getApplicationContext(), dis.toString(), Toast.LENGTH_LONG).show();
+            }catch (Exception e){
+
             }
-        }catch (Exception e){
-            Toast.makeText(getApplicationContext(), puj, Toast.LENGTH_LONG).show();
         }
+
 
 
 
@@ -460,7 +481,9 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
+
                     LatLng position = new LatLng(lat, lng);
+                //    map.addMarker(new MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                     points.add(position);
 
 
@@ -991,23 +1014,27 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             //  String C=c.filterC(Flatlng, Llatlng);
             // String D=c.filterD(Flatlng, Llatlng);
 
+            try{
+                Intent i = new Intent(MapsActivity.this, infoDetails.class);
+                i.putExtra("distance", finalDistance);
+                i.putExtra("duration", finalDuration);
+                i.putExtra("mode", selectedMode);
+                i.putExtra("start", dFrom);
+                i.putExtra("end", dTo);
+                i.putExtra("jeep", dis);
+                startActivity(i);
+
+            }catch (Exception e){
+
+            }
 
 
-
-            Intent i = new Intent(MapsActivity.this, infoDetails.class);
-            i.putExtra("distance", finalDistance);
-            i.putExtra("duration", finalDuration);
-            i.putExtra("mode", selectedMode);
-            i.putExtra("start", dFrom);
-            i.putExtra("end", dTo);
-            i.putExtra("jeep", puj);
 
             // i.putExtra("A", A);
             // i.putExtra("B", B);
             // i.putExtra("C", C);
             //i.putExtra("D", D);
 
-            startActivity(i);
         }catch (Exception e){
 
         }
@@ -1020,13 +1047,20 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         EditText startL = (EditText) findViewById(R.id.first);
         String firstL = startL.getText().toString();
 
-
         EditText endL = (EditText) findViewById(R.id.editText2);
         String lastL = endL.getText().toString();
         dFrom = firstL;
         dTo = lastL;
-
+        start=true;
         map.clear();
+        pujlist.removeAll(pujlist);
+        dis = "";
+        /*try{
+            PostResponseAsyncTask task2 = new PostResponseAsyncTask(this);
+            task2.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
+        }catch (Exception error){
+
+        }*/
 
 
         List<Address> firstlist = null;
@@ -1054,6 +1088,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                     lng = addressF.getLongitude();
 
 
+
                     map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                     map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                     //url
@@ -1071,14 +1106,15 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
                     map.animateCamera(cu);
+                    PostResponseAsyncTask taskmark = new PostResponseAsyncTask(this);
+                    taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/" + addressF.getLatitude() + "/" + addressF.getLongitude());
 
-                    selectedMode = " A ";
+
+                    //selectedMode = " A ";
                     //line
                     DownloadTask downloadTask = new DownloadTask();
                     downloadTask.execute(url);
-
-                    PostResponseAsyncTask task = new PostResponseAsyncTask(this);
-                    task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/"+addressF.getLatitude()+"/"+addressF.getLongitude());
+                    //Toast.makeText(getApplicationContext(), pujlist.toString(), Toast.LENGTH_LONG).show();
 
                 }else{
                     Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
@@ -1091,7 +1127,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             String textk = " Fill out Both Forms ";
             Toast.makeText(context, textk, Toast.LENGTH_LONG).show();
         }
-
+        //Toast.makeText(getApplicationContext(), pujlist.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), pujlist.toString(), Toast.LENGTH_LONG).show();
     }
 
 
