@@ -23,6 +23,7 @@ import com.kosalgeek.asynctask.AsyncResponse;
 import com.kosalgeek.asynctask.PostResponseAsyncTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 
 public class PostActivity extends Activity  implements AsyncResponse, View.OnClickListener{
     Bitmap userPost;
@@ -131,7 +132,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
             finish();
         }
         else{
-            Toast.makeText(this, "Error in Uploading...", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         }
 
     }
@@ -141,20 +142,20 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         timer.cancel();
 
         AddressHolder add=new AddressHolder();
-        //HashMap postData = new HashMap();
-        //postData.put("encoded_string",encoded_string);
-        //postData.put("caption", caption.getText().toString());
-        //postData.put("location", tvAddress.getText().toString());
-        //postData.put("dist_type", traf_choice.toString());
-        //postData.put("userid", userid);
-        //postData.put("latitude", lat.getText().toString());
-        //postData.put("longitude", lng.getText().toString());
+        HashMap postData = new HashMap();
+        postData.put("encoded_string",encoded_string);
+        postData.put("caption", caption.getText().toString());
+        postData.put("location", tvAddress.getText().toString());
+        postData.put("dist_type", traf_choice.toString());
+        postData.put("userid", userid);
+        postData.put("latitude", lat.getText().toString());
+        postData.put("longitude", lng.getText().toString());
 
         //postData.put("caption", gps);
 
-        PostResponseAsyncTask task = new PostResponseAsyncTask(this);
-        //task.execute(add.getIpaddress() + "ESCMOBILE/connect.php");
-        task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/upload/"+encoded_string+"/"+caption+"/"+tvAddress.getText().toString()+"/"+traf_choice.toString()+"/"+userid+"/"+lat+"/"+lng+"/"+type);
+        PostResponseAsyncTask task = new PostResponseAsyncTask(this,postData);
+        task.execute(add.getIpaddress() + "ESCMOBILE/connect.php");
+        //task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/upload/"+encoded_string+"/"+caption+"/"+tvAddress.getText().toString()+"/"+traf_choice.toString()+"/"+userid+"/"+lat+"/"+lng+"/"+type);
     }
 
     public void btnGPS(View view){

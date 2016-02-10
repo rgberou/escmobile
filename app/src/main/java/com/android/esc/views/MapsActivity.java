@@ -337,7 +337,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     @Override
     public void processFinish(String result) {
         try {
-           postList = new JsonConverter<Posts>().toArrayList(result, Posts.class);
+            postList = new JsonConverter<Posts>().toArrayList(result, Posts.class);
             for(Posts value: postList) {
                 double lat = Double.parseDouble(value.lat);
                 double lng = Double.parseDouble(value.lng);
@@ -355,7 +355,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             try {
                 sb.setLength(0);
                 routesList = new JsonConverter<Routes>().toArrayList(result, Routes.class);
-                for(Routes value: routesList) {
+                for (Routes value: routesList) {
 
                     puj2=new String[routesList.size()];
                     if(pujlist.contains(value.PUJ_id)){
@@ -483,7 +483,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                     double lng = Double.parseDouble(point.get("lng"));
 
                     LatLng position = new LatLng(lat, lng);
-                //    map.addMarker(new MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    //    map.addMarker(new MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                     points.add(position);
 
 
@@ -1166,34 +1166,39 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                 // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
                 Address addressL = lastlist.get(0);
                 //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+                if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")) {
+                    LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                    LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
 
-                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                    map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    //url
+                    String url = getDirectionsAltUrl(Flatlng, Llatlng);
 
-                //url
-                String url = getDirectionsAltUrl(Flatlng, Llatlng);
+                    //zoom lvl
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-                //zoom lvl
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    builder.include(Flatlng);
+                    builder.include(Llatlng);
 
-                builder.include(Flatlng);
-                builder.include(Llatlng);
+                    LatLngBounds bounds = builder.build();
 
-                LatLngBounds bounds = builder.build();
+                    int padding = 10; // offset from edges of the map in pixels
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-                int padding = 10; // offset from edges of the map in pixels
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                    map.animateCamera(cu);
 
-                map.animateCamera(cu);
+                    selectedMode = " B ";
 
-                selectedMode = " B ";
-
-                //line
-                DownloadTaskB downloadTask = new DownloadTaskB();
-                downloadTask.execute(url);
+                    //line
+                    DownloadTaskB downloadTask = new DownloadTaskB();
+                    downloadTask.execute(url);
+                    PostResponseAsyncTask taskmark = new PostResponseAsyncTask(this);
+                    taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/" + addressF.getLatitude() + "/" + addressF.getLongitude());
+                }else{
+                    Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
+                }
             }catch (Exception e)
             {
 
@@ -1239,34 +1244,40 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                 // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
                 Address addressL = lastlist.get(0);
                 //  dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+                if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")) {
+                    LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                    LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
 
-                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                    map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    //url
+                    String url = transitUrl(Flatlng, Llatlng);
 
-                //url
-                String url = transitUrl(Flatlng, Llatlng);
+                    //zoom lvl
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-                //zoom lvl
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    builder.include(Flatlng);
+                    builder.include(Llatlng);
 
-                builder.include(Flatlng);
-                builder.include(Llatlng);
+                    LatLngBounds bounds = builder.build();
 
-                LatLngBounds bounds = builder.build();
+                    int padding = 10; // offset from edges of the map in pixels
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-                int padding = 10; // offset from edges of the map in pixels
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                    map.animateCamera(cu);
 
-                map.animateCamera(cu);
+                    selectedMode = " C ";
 
-                selectedMode = " C ";
+                    //line
+                    DownloadTaskC downloadTask = new DownloadTaskC();
+                    downloadTask.execute(url);
 
-                //line
-                DownloadTaskC downloadTask = new DownloadTaskC();
-                downloadTask.execute(url);
+                    PostResponseAsyncTask taskmark = new PostResponseAsyncTask(this);
+                    taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/" + addressF.getLatitude() + "/" + addressF.getLongitude());
+                }else{
+                    Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
+                }
             }catch (Exception e)
             {
 
@@ -1312,33 +1323,40 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                 // dFrom = ((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
                 Address addressL = lastlist.get(0);
                 // dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
-                LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
-                LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+                if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")) {
+                    LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                    LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
 
-                map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-                //url
-                String url = transitAltUrl(Flatlng, Llatlng);
+                    //url
+                    String url = transitAltUrl(Flatlng, Llatlng);
 
-                //zoom lvl
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    //zoom lvl
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-                builder.include(Flatlng);
-                builder.include(Llatlng);
+                    builder.include(Flatlng);
+                    builder.include(Llatlng);
 
-                LatLngBounds bounds = builder.build();
+                    LatLngBounds bounds = builder.build();
 
-                int padding = 10; // offset from edges of the map in pixels
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                    int padding = 10; // offset from edges of the map in pixels
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-                map.animateCamera(cu);
+                    map.animateCamera(cu);
 
-                selectedMode = " D ";
+                    selectedMode = " D ";
 
-                //line
-                DownloadTaskD downloadTask = new DownloadTaskD();
-                downloadTask.execute(url);
+                    //line
+                    DownloadTaskD downloadTask = new DownloadTaskD();
+                    downloadTask.execute(url);
+
+                    PostResponseAsyncTask taskmark = new PostResponseAsyncTask(this);
+                    taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/" + addressF.getLatitude() + "/" + addressF.getLongitude());
+                }else{
+                    Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
+                }
             }catch (Exception e)
             {
 
