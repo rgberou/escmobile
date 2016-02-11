@@ -8,8 +8,6 @@ import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -87,7 +85,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     ParseTask parserTask;
     Marker marker;
     AddressHolder add=new AddressHolder();
-
+    String startPoint, endPoint, jeep;
 
     private LatLng mand = new LatLng(10.32361, 123.92222);
 
@@ -102,16 +100,21 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         PostResponseAsyncTask task = new PostResponseAsyncTask(this);
         task.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
 
+        Intent intent = getIntent();
+        startPoint= intent.getStringExtra("startPoint");
+        endPoint = intent.getStringExtra("endPoint");
+        jeep = intent.getStringExtra("jeep");
 
 
         ArrayList<LatLng> locList = new ArrayList<LatLng>();
 
         firstT = (AutoCompleteTextView) findViewById(R.id.first);
-        firstT.setThreshold(1);
+        //firstT.setThreshold(1);
         secondT = (AutoCompleteTextView) findViewById(R.id.editText2);
-        secondT.setThreshold(1);
-
-        firstT.addTextChangedListener(new TextWatcher() {
+        //secondT.setThreshold(1);
+        firstT.setText(startPoint);
+        secondT.setText(endPoint);
+        /*firstT.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 placesTask = new PlacesTask();
@@ -147,7 +150,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             }
         });
 
-
+*/
 
     }
 

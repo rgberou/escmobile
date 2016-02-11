@@ -94,7 +94,8 @@
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
                 android:hint="From"
-                android:shadowColor="#FF4F5853" />
+                android:shadowColor="#FF4F5853"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,7 +124,7 @@
                 android:layout_gravity="center_vertical"
                 android:hint="To"
                 android:shadowColor="#FF4F5853"
-                />
+                android:enabled="false" />
 
         </LinearLayout>
     </LinearLayout>

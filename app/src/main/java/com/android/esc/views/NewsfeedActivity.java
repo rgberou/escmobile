@@ -140,8 +140,8 @@ public class NewsfeedActivity extends Activity implements AsyncResponse {
     }
 
     public void mapview(View v){
-        Intent i = new Intent(this,MapsActivity.class);
-        //Intent i = new Intent(this,GetDirection.class);
+        //Intent i = new Intent(this,MapsActivity.class);
+        Intent i = new Intent(this,GetOrigin.class);
         startActivity(i);
 
     }

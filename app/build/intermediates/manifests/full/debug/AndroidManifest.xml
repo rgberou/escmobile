@@ -109,6 +109,10 @@
             android:name="com.android.esc.views.EditProfileActivity"
             android:label="@string/title_activity_edit_profile" >
         </activity>
+        <activity
+            android:name="com.android.esc.views.GetOrigin"
+            android:label="@string/title_activity_get_origin" >
+        </activity>
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
