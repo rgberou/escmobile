@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class PostActivity extends Activity  implements AsyncResponse, View.OnClickListener{
     Bitmap userPost;
     EditText caption;
-    String username, password, lati, lang, type;
+    String username, password, lati, lang, type, holder;
     TextView tvAddress, lat, lng, typestatus;
     Spinner choice;
     String userid, traf_choice;
@@ -89,6 +89,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
             lati = intent.getStringExtra("lat");
             lang = intent.getStringExtra("lng");
             type = intent.getStringExtra("type");
+            holder = type.toString();
 
             postBtn = (Button) findViewById(R.id.postBtn);
             postBtn.setOnClickListener(this);
@@ -150,6 +151,8 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
         postData.put("userid", userid);
         postData.put("latitude", lat.getText().toString());
         postData.put("longitude", lng.getText().toString());
+        postData.put("type", holder);
+
 
         //postData.put("caption", gps);
 

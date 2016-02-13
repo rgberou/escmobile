@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -47,11 +48,15 @@ public class GetOrigin extends Activity implements AsyncResponse {
     ArrayList<String> pujlist= new ArrayList<String>();
     String puj,jproute="",dis="";
     StringBuilder sb = new StringBuilder();
+    double lng;
+    double lat;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getActionBar().hide();
         setContentView(R.layout.activity_get_origin);
 
         firstT = (AutoCompleteTextView) findViewById(R.id.firstF);
@@ -135,28 +140,12 @@ public class GetOrigin extends Activity implements AsyncResponse {
         }
         return data;
     }
+    public void back(View v){
+        finish();
 
-    @Override
-    public void processFinish(String s) {
-        sb.setLength(0);
-        routesList = new JsonConverter<Routes>().toArrayList(s, Routes.class);
-        for (Routes value: routesList) {
-
-            puj2=new String[routesList.size()];
-            if(pujlist.contains(value.PUJ_id)){
-
-            }else {
-
-                pujlist.add(value.PUJ_id);
-
-            }
-
-        }
-        jproute = String.valueOf(sb.append(pujlist + " "));
-        dis = jproute.replace("[", "").replace("]", "");
-
-        Toast.makeText(getApplicationContext(), dis.toString(), Toast.LENGTH_LONG).show();
     }
+
+
 
     private class PlacesTask extends AsyncTask<String, Void, String> {
 
@@ -252,6 +241,36 @@ public class GetOrigin extends Activity implements AsyncResponse {
 
         }
     }
+    @Override
+    public void processFinish(String s) {
+
+        sb.setLength(0);
+        routesList = new JsonConverter<Routes>().toArrayList(s, Routes.class);
+        for (Routes value: routesList) {
+
+            puj2=new String[routesList.size()];
+            if(pujlist.contains(value.PUJ_id)){
+
+            }else {
+
+                pujlist.add(value.PUJ_id);
+
+            }
+
+        }
+        jproute = String.valueOf(sb.append(pujlist + " "));
+        dis = jproute.replace("[", "").replace("]", "");
+
+
+        Intent i = new Intent(this,MapsActivity.class);
+        i.putExtra("startPoint",firstT.getText().toString());
+        i.putExtra("endPoint", secondT.getText().toString());
+        i.putExtra("jeep",dis.toString());
+        i.putExtra("latdest",lat);
+        i.putExtra("lngdest",lng);
+        startActivity(i);
+        finish();
+    }
 
 
 
@@ -271,26 +290,28 @@ public class GetOrigin extends Activity implements AsyncResponse {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Address addressF = firstlist.get(0);
-        Address addressL = lastlist.get(0);
-
-
-        if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")){
+        try{
+            Address addressF = firstlist.get(0);
+            Address addressL = lastlist.get(0);
 
 
-            PostResponseAsyncTask taskmark = new PostResponseAsyncTask(this);
-            taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/" + addressF.getLatitude() + "/" + addressF.getLongitude());
+            if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")){
 
-            Intent i = new Intent(this,MapsActivity.class);
-            i.putExtra("startPoint",firstL);
-            i.putExtra("endPoint",lastL);
-            i.putExtra("jeep",dis);
-            startActivity(i);
+                PostResponseAsyncTask taskmark = new PostResponseAsyncTask(this);
+                taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/" + addressF.getLatitude() + "/" + addressF.getLongitude());
+                lat=addressL.getLatitude();
+                lng=addressL.getLongitude();
 
-        }else{
-            Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();
+            }
+
+        }catch (Exception err){
+            Toast.makeText(getApplicationContext(), "Unable to connect to Server", Toast.LENGTH_LONG).show();
         }
+
+
+
 
 
 

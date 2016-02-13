@@ -56,6 +56,10 @@ public class RegistrationActivity extends Activity implements  AsyncResponse, Vi
 
     }
 
+    public boolean isEmail(String email) {
+        return email.contains("@") && email.contains(".com") && email.indexOf("@") < email.indexOf(".com");
+    }
+
     @Override
     public void onClick(View view) {
         HashMap postData = new HashMap();

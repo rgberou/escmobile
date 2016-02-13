@@ -106,6 +106,10 @@
             android:name=".views.GetOrigin"
             android:label="@string/title_activity_get_origin" >
         </activity>
+        <activity
+            android:name=".views.layout.GetDestinatiionActivity"
+            android:label="@string/title_activity_get_destinatiion" >
+        </activity>
     </application>
 
 </manifest>

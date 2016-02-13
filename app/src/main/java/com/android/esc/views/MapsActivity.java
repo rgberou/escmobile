@@ -188,6 +188,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 //-------------------------------------------Url's For Man's Sake -------------------------------------------
 
     public void back(View v){
+        Intent i = new Intent(this,GetOrigin.class);
+        startActivity(i);
         finish();
 
     }
@@ -346,14 +348,25 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                 double lng = Double.parseDouble(value.lng);
                 LatLng latlng = new LatLng(lat,lng);
 
-                map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.map)));
+                if(value.dist_type.equals("H")){
+                    map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.heavy)));
+                }else if(value.dist_type.equals("L")){
+                    map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.light)));
+                }else if(value.dist_type.equals("M")){
+                    map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.moderate)));
+                }else if(value.dist_type.equals("R")){
+                    map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.roadwork)));
+                }else if(value.dist_type.equals("A")){
+                    map.addMarker(new MarkerOptions().position(latlng).title(value.caption).icon(BitmapDescriptorFactory.fromResource(R.mipmap.accidents)));
+                }
+
 
             }
         }catch (Exception e){
 
         }
 
-        if(start){
+        /*if(start){
 
             try {
                 sb.setLength(0);
@@ -377,7 +390,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
             }catch (Exception e){
 
             }
-        }
+        }*/
 
 
 
@@ -1024,7 +1037,7 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
                 i.putExtra("mode", selectedMode);
                 i.putExtra("start", dFrom);
                 i.putExtra("end", dTo);
-                i.putExtra("jeep", dis);
+                i.putExtra("jeep", jeep);
                 startActivity(i);
 
             }catch (Exception e){
@@ -1058,12 +1071,12 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         map.clear();
         pujlist.removeAll(pujlist);
         dis = "";
-        /*try{
+        try{
             PostResponseAsyncTask task2 = new PostResponseAsyncTask(this);
             task2.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
         }catch (Exception error){
-
-        }*/
+            Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_LONG).show();
+        }
 
 
         List<Address> firstlist = null;
@@ -1151,6 +1164,13 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
         map.clear();
 
+        try{
+            PostResponseAsyncTask task2 = new PostResponseAsyncTask(this);
+            task2.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
+        }catch (Exception error){
+
+        }
+
 
         List<Address> firstlist = null;
         List<Address> lastlist = null;
@@ -1229,6 +1249,12 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
         map.clear();
 
+        try{
+            PostResponseAsyncTask task2 = new PostResponseAsyncTask(this);
+            task2.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
+        }catch (Exception error){
+
+        }
 
         List<Address> firstlist = null;
         List<Address> lastlist = null;
@@ -1308,6 +1334,12 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
         map.clear();
 
+        try{
+            PostResponseAsyncTask task2 = new PostResponseAsyncTask(this);
+            task2.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
+        }catch (Exception error){
+
+        }
 
         List<Address> firstlist = null;
         List<Address> lastlist = null;

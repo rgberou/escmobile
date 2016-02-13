@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.android.esc.views.GetDirection">
+
+
+
+    <com.android.esc.controllers.AutoComplete
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstF"
+        android:drawableLeft="@mipmap/from"
+        android:background="@drawable/editstyle_post"
+        android:layout_weight="1"
+        android:hint="From"
+        android:padding="2dp"
+        android:shadowColor="#FF4F5853"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
+
+    <com.android.esc.controllers.AutoComplete
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondF"
+        android:drawableLeft="@mipmap/from"
+        android:background="@drawable/editstyle_post"
+        android:layout_weight="1"
+        android:hint="To"
+        android:padding="2dp"
+        android:shadowColor="#FF4F5853"
+        android:layout_below="@+id/firstF"
+        android:layout_alignLeft="@+id/firstF"
+        android:layout_alignStart="@+id/firstF"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/button5"
+        android:layout_below="@+id/secondF"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="btnClick" />
+
+</RelativeLayout>
+<!-- From: file:/C:/Users/Rg/Documents/GitHub/escmobile/app/src/main/res/layout/activity_get_destinatiion.xml -->

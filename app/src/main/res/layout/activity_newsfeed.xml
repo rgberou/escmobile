@@ -56,11 +56,11 @@
                     android:background="#FFF"
                     android:drawableLeft="@mipmap/profile"
 
-                    android:text="My Profile"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="150dp"
+                    android:text="   My Profile"
                     android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp" />
+                    android:layout_marginTop="2dp"
+                    android:paddingLeft="20dp"
+                    android:gravity="left|center" />
 
                 <Button
                     android:id="@+id/newsfeed"
@@ -68,15 +68,14 @@
                     android:layout_height="wrap_content"
                     android:onClick="newsfeed"
                     android:background="#FFF"
-                    android:gravity="center"
+                    android:gravity="left|center"
                     android:textSize="16sp"
-                    android:paddingLeft="20dp"
                     android:drawableLeft="@mipmap/newsfeed"
 
-                    android:text="Newsfeed"
-                    android:paddingRight="150dp"
+                    android:text="   Newsfeed"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginBottom="2dp"
+                    android:paddingLeft="20dp" />
 
                 <Button
                     android:id="@+id/map_view"
@@ -84,12 +83,11 @@
                     android:layout_height="wrap_content"
                     android:onClick="mapview"
                     android:background="#FFF"
-                    android:gravity="center"
+                    android:gravity="left|center"
                     android:textSize="16sp"
-                    android:paddingRight="190dp"
                     android:paddingLeft="20dp"
                     android:drawableLeft="@mipmap/map"
-                    android:text="Map"
+                    android:text="   Map"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:nestedScrollingEnabled="true" />
@@ -101,12 +99,12 @@
                     android:onClick="logout"
                     android:background="#FFF"
                     android:textSize="16sp"
-                    android:paddingRight="180dp"
                     android:paddingLeft="20dp"
                     android:drawableLeft="@mipmap/logout"
-                    android:text="Logout"
+                    android:text="   Logout"
                     android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginBottom="2dp"
+                    android:gravity="left|center" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

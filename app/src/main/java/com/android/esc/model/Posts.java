@@ -29,5 +29,8 @@ public class Posts {
     @SerializedName("date_posted")
     public String date_posted;
 
+    @SerializedName("dist_type")
+    public String dist_type;
+
 
 }

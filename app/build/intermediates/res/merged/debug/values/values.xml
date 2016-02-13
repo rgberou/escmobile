@@ -403,6 +403,7 @@
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="title_activity_get_destinatiion">GetDestinatiionActivity</string>
     <string name="title_activity_get_direction">GetDirection</string>
     <string name="title_activity_get_origin">GetOrigin</string>
     <string name="title_activity_login">LoginActivity</string>
