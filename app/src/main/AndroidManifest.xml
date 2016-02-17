@@ -9,6 +9,7 @@
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -109,6 +110,14 @@
         <activity
             android:name=".views.layout.GetDestinatiionActivity"
             android:label="@string/title_activity_get_destinatiion" >
+        </activity>
+        <activity
+            android:name=".views.HomeMapActivity"
+            android:label="@string/title_activity_home_map" >
+        </activity>
+        <activity
+            android:name=".views.PostVideoActivity"
+            android:label="@string/title_activity_post_video" >
         </activity>
     </application>
 

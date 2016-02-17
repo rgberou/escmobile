@@ -30,6 +30,11 @@
         <item>Accident</item>
         <item>Roadwork</item>
     </string-array>
+    <string-array name="mod_transpo">
+        <item>Private Vehicle</item>
+        <item>Jeepney</item>
+        <item>Taxi</item>
+    </string-array>
     <string name="title_activity_newsfeed_fte">NewsfeedFTE</string>
     <string name="title_activity_post_activity_fte">PostActivityFTE</string>
     <string name="title_activity_take_video">Take Video</string>
@@ -43,5 +48,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_get_origin">GetOrigin</string>
     <string name="title_activity_get_destinatiion">GetDestinatiionActivity</string>
+    <string name="title_activity_home_map">Map</string>
+    <string name="title_activity_post_video">PostVideoActivity</string>
 
 </resources>

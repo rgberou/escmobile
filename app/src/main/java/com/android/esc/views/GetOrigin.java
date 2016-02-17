@@ -11,8 +11,10 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.esc.R;
@@ -43,14 +45,17 @@ public class GetOrigin extends Activity implements AsyncResponse {
     PlacesTask placesTask;
     ParseTask parserTask;
     AddressHolder add=new AddressHolder();
-    ArrayList<Routes> routesList;
+    //ArrayList<Routes> routesList =  new ArrayList<>();
     String puj2[];
     ArrayList<String> pujlist= new ArrayList<String>();
-    String puj,jproute="",dis="";
-    StringBuilder sb = new StringBuilder();
+    String puj;
+    String jproute="";
+    String dis="", mode;
+    Spinner choice;
+
     double lng;
     double lat;
-
+    StringBuffer sb=new StringBuffer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,23 @@ public class GetOrigin extends Activity implements AsyncResponse {
         firstT.setThreshold(1);
         secondT = (AutoCompleteTextView) findViewById(R.id.secondF);
         secondT.setThreshold(1);
+
+        choice = (Spinner)findViewById(R.id.choice);
+        choice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                mode = choice.getSelectedItem().toString();
+                Toast.makeText(GetOrigin.this, mode, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
 
         firstT.addTextChangedListener(new TextWatcher() {
             @Override
@@ -242,26 +264,24 @@ public class GetOrigin extends Activity implements AsyncResponse {
         }
     }
     @Override
-    public void processFinish(String s) {
-
+    public void processFinish(String result) {
         sb.setLength(0);
-        routesList = new JsonConverter<Routes>().toArrayList(s, Routes.class);
-        for (Routes value: routesList) {
+        ArrayList<Routes> routesLists  =
+                new JsonConverter<Routes>().toArrayList(result, Routes.class);
+        for (Routes value: routesLists) {
 
-            puj2=new String[routesList.size()];
+            //puj2=new String[routesList.size()];
             if(pujlist.contains(value.PUJ_id)){
 
             }else {
-
                 pujlist.add(value.PUJ_id);
-
             }
 
         }
         jproute = String.valueOf(sb.append(pujlist + " "));
         dis = jproute.replace("[", "").replace("]", "");
 
-
+        //jproute = String.valueOf(sb.append(pujlist));
         Intent i = new Intent(this,MapsActivity.class);
         i.putExtra("startPoint",firstT.getText().toString());
         i.putExtra("endPoint", secondT.getText().toString());
@@ -294,13 +314,23 @@ public class GetOrigin extends Activity implements AsyncResponse {
             Address addressF = firstlist.get(0);
             Address addressL = lastlist.get(0);
 
+        //    Toast.makeText(getApplicationContext(), addressF.getLatitude()+" - "+ addressF.getLongitude(), Toast.LENGTH_LONG).show();
 
             if(addressF.getLocality().equals("Mandaue City")&&addressL.getLocality().equals("Mandaue City")){
+               // HashMap postData = new HashMap();
+
+             /*   postData.put("flat", addressF.getLatitude());
+                postData.put("flng", addressF.getLongitude());
+                postData.put("llat", addressL.getLatitude());
+                postData.put("llng", addressF.getLongitude()); */
+
 
                 PostResponseAsyncTask taskmark = new PostResponseAsyncTask(this);
-                taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/" + addressF.getLatitude() + "/" + addressF.getLongitude());
+                taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/"+ addressF.getLatitude() + "/" + addressF.getLongitude()+"/" + addressL.getLatitude() + "/" + addressL.getLongitude());
+                //taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes");
                 lat=addressL.getLatitude();
                 lng=addressL.getLongitude();
+                Toast.makeText(getApplicationContext(), addressF.getLatitude()+" "+addressF.getLongitude(), Toast.LENGTH_LONG).show();
 
             }else{
                 Toast.makeText(getApplicationContext(), "Places limited only for Mandaue City", Toast.LENGTH_LONG).show();

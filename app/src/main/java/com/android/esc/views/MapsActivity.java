@@ -152,6 +152,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
 
 */
 
+
+
     }
 
     @Override
@@ -181,6 +183,8 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
         map.setIndoorEnabled(true);
 
         map.setBuildingsEnabled(true);
+
+        startRoute();
 
 
     }
@@ -1500,7 +1504,86 @@ public class MapsActivity extends FragmentActivity implements AsyncResponse {
     }
 
 
+ public void startRoute()
+ {
+     EditText startL = (EditText) findViewById(R.id.first);
+     String firstL = startL.getText().toString();
 
+     EditText endL = (EditText) findViewById(R.id.editText2);
+     String lastL = endL.getText().toString();
+     dFrom = firstL;
+     dTo = lastL;
+     start=true;
+     map.clear();
+     pujlist.removeAll(pujlist);
+     dis = "";
+     try{
+         PostResponseAsyncTask task2 = new PostResponseAsyncTask(this);
+         task2.execute(add.getIpaddress() + "Escape/index.php/mobileuser/TrafficMarker");
+     }catch (Exception error){
+         Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_LONG).show();
+     }
+
+
+     List<Address> firstlist = null;
+     List<Address> lastlist = null;
+
+
+
+         Geocoder gcode = new Geocoder(this);
+         try {
+             firstlist = gcode.getFromLocationName(firstL, 1);
+             lastlist = gcode.getFromLocationName(lastL, 1);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+         try {
+             Address addressF = firstlist.get(0);
+             // dFrom = ((addressF.getPremises() == null) ? "" : addressF.getPremises())+","+((addressF.getThoroughfare() == null) ? "" : addressF.getThoroughfare()) + "," + addressF.getLocality();
+             Address addressL = lastlist.get(0);
+             //dTo = ((addressL.getThoroughfare() == null) ? "" : addressL.getThoroughfare()) + "," + addressL.getLocality();
+
+              LatLng Flatlng = new LatLng(addressF.getLatitude(), addressF.getLongitude());
+                 LatLng Llatlng = new LatLng(addressL.getLatitude(), addressL.getLongitude());
+
+                 lat = addressF.getLatitude();
+                 lng = addressF.getLongitude();
+
+
+
+                 map.addMarker(new MarkerOptions().position(Flatlng).title(firstL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                 map.addMarker(new MarkerOptions().position(Llatlng).title(lastL).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                 //url
+                 String url = getDirectionsUrl(Flatlng, Llatlng);
+
+                 //zoom lvl
+                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+                 builder.include(Flatlng);
+                 builder.include(Llatlng);
+
+                 LatLngBounds bounds = builder.build();
+
+                 int padding = 10; // offset from edges of the map in pixels
+                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+                 map.animateCamera(cu);
+                 PostResponseAsyncTask taskmark = new PostResponseAsyncTask(this);
+                 taskmark.execute(add.getIpaddress() + "Escape/index.php/mobileuser/fetchRoutes/" + addressF.getLatitude() + "/" + addressF.getLongitude());
+
+
+                 //selectedMode = " A ";
+                 //line
+                 DownloadTask downloadTask = new DownloadTask();
+                 downloadTask.execute(url);
+                 //Toast.makeText(getApplicationContext(), pujlist.toString(), Toast.LENGTH_LONG).show();
+
+
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+ }
 
 
 }

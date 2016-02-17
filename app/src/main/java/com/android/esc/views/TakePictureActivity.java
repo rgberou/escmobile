@@ -17,7 +17,7 @@ import com.android.esc.controllers.GPSService;
 
 public class TakePictureActivity extends Activity {
     final Timer timer=new Timer(120000,1000);
-    public static final int CAMERA_REQUEST = 100;
+    public static final int CAMERA_REQUEST = 500;
     public static final int VIDEO_REQUEST = 200;
     private ImageView imgDisplay;
     private Bitmap cam;
@@ -123,6 +123,8 @@ public class TakePictureActivity extends Activity {
                 i.putExtra("picture", cam);
                 i.putExtra("address", address);
                 i.putExtra("userid", userid);
+                i.putExtra("username", username);
+                i.putExtra("password", password);
                 i.putExtra("type", type);
                 i.putExtra("lat", String.valueOf(latitude));
                 i.putExtra("lng", String.valueOf(longitude));

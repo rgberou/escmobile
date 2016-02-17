@@ -105,8 +105,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             userPost.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             byte[] array = stream.toByteArray();
-            encoded_string = Base64.encodeToString(array, 0);
-
+            encoded_string = Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
             TextView tvAddress = (TextView) findViewById(R.id.tvadd);
 
             tvAddress.setText(gps);
@@ -133,7 +132,7 @@ public class PostActivity extends Activity  implements AsyncResponse, View.OnCli
             finish();
         }
         else{
-            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
         }
 
     }

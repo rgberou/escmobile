@@ -104,6 +104,31 @@
                 android:selectAllOnFocus="false" />
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Mode of Transportation:"
+                android:id="@+id/textView18"
+                android:visibility="visible" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:id="@+id/choice"
+                android:entries="@array/mod_transpo"
+                android:popupBackground="#098446"
+                android:visibility="visible" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
